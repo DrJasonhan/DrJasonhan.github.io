@@ -2620,7 +2620,7 @@ input, select, textarea {
 			-webkit-flex-grow: 1;
 			-ms-flex-grow: 1;
 			flex-grow: 1;
-			margin: 0 0 2em 0;
+			margin: 0 0 0 0;
 		}
 
 		#header strong, #header b {
@@ -2635,18 +2635,26 @@ input, select, textarea {
 			color: rgba(255, 255, 255, 0.5);
 			font-size: 1.35em;
 			line-height: 1.75em;
-			margin: 0;
+			/*margin: 0,0,0,0;*/
+			margin-bottom:10px;
 		}
 
 		#header .image.avatar {
-			margin: 0 0 1em 0;
-			width: 6.25em;
+			margin: 0 0 0 0;
+			width: 8.25em;
+		}
+		#header hr{
+            margin-top: 0px;
+			height:0px;
+		}
+		#header dl{
+			margin-top: -20px;
 		}
 
 /* Footer */
 
 	#footer .icons {
-		margin: 1em 0 0 0;
+		margin: -15px 0 0 0;
 	}
 
 		#footer .icons a {
