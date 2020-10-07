@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on My New Hugo Site</title>
+    <title>Posts on Jason Han&#39;s Blog</title>
     <link>https://drjasonhan.github.io/post/</link>
-    <description>Recent content in Posts on My New Hugo Site</description>
+    <description>Recent content in Posts on Jason Han&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Wed, 07 Oct 2020 19:01:53 +0800</lastBuildDate><atom:link href="https://drjasonhan.github.io/post/index.xml" rel="self" type="application/rss+xml" />

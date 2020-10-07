@@ -1,9 +1,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>My New Hugo Site </title>
+        <title>Jason Han&#39;s Blog </title>
         <link>https://drjasonhan.github.io/</link>
         <language>en-us</language>
-        <author>Pravin Paratey</author>
+        <author>Jason Han</author>
         <rights>(c) 2020</rights>
         <updated>2020-10-07 19:01:53 &#43;0800 CST</updated>
 
@@ -13,7 +13,7 @@
             <title>Posts</title>
             <link>https://drjasonhan.github.io/post/</link>
             <pubDate>Wed, 07 Oct 2020 19:01:53 CST</pubDate>
-            <author>Pravin Paratey</author>
+            <author>Jason Han</author>
             <guid>https://drjasonhan.github.io/post/</guid>
             <description></description>
             </item>
