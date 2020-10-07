@@ -9,18 +9,6 @@
     <lastBuildDate>Wed, 07 Oct 2020 19:01:53 +0800</lastBuildDate><atom:link href="https://drjasonhan.github.io/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mermaid绘图基础</title>
-      <link>https://drjasonhan.github.io/post/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/</link>
-      <pubDate>Wed, 07 Oct 2020 19:01:53 +0800</pubDate>
-      
-      <guid>https://drjasonhan.github.io/post/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/</guid>
-      <description>#Mermaid绘图基础 在 Markdown 中进行简易的流程图绘制，最常用的就是Mermaid。
-1. 基本语法 Mermaid制作流程图的基本语法格式如下：
-​```mermaidgraph 方向;开始--&amp;gt;结束;``` 方向可以为TB(从上到下)、LR(从左到右)、RL(从右到左)、BT(从下到上) “开始”和“结束”都代表流程图中的标签，标签的格式为id[显示内容]，这里的方括号代表标签的图形为直角方框，也可以换成圆括号，图形将会变成圆角方框。 示例：  ```mermaidgraph LR;A[&amp;quot;开始&amp;quot;]--&amp;gt;B(&amp;quot;结束&amp;quot;);```显示为： ​```mermaid graph LR; A[&amp;ldquo;开始&amp;rdquo;]&amp;ndash;&amp;gt;B(&amp;ldquo;结束&amp;rdquo;);
-</description>
-    </item>
-    
-    <item>
-      <title>Mermaid绘图基础</title>
       <link>https://drjasonhan.github.io/posts/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Wed, 07 Oct 2020 19:01:53 +0800</pubDate>
       
