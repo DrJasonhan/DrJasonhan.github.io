@@ -4,7 +4,7 @@
     <meta name="theme-color" content="#000" />
     <title>
         
-            About &middot; My New Hugo Site Hugo Theme - Prav
+            重新理解MLE，MAP和贝叶斯估计 &middot; My New Hugo Site Hugo Theme - Prav
         
     </title>
 
@@ -121,11 +121,59 @@
 </div>
 
 <article>
-    <h1><a href="https://drjasonhan.github.io/about/">About</a></h1>
+    <h1><a href="https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3mlemap%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/">重新理解MLE，MAP和贝叶斯估计</a></h1>
     <div class="tags">
         
     </div>
-    <h1 id="关于">关于</h1>
+    <h2 id="1-mle极大似然估计">1. MLE，极大似然估计</h2>
+<p>MLE把带估计的参数看做确定的量，其目标函数是使得以观察到的样本的概率最大：
+$$
+\operatorname{argmax}p(X \mid \theta)=\operatorname{argmax}\prod_{x_1}^{x_n} p(x_i \mid \theta) \tag{1}
+$$
+对数化处理后为：
+$$
+\operatorname{argmax}\prod_{x_1}^{x_n} p(x_i \mid \theta)=\operatorname{argmax}\sum_{x_1}^{x_n} \log p(x_i \mid \theta) \tag{2}
+$$
+即：
+$$
+\left{
+\begin{aligned}
+&amp;L(\theta) = \sum_{x_1}^{x_n} \log p(x_i \mid \theta)\<br>
+&amp;\frac{\partial L}{\partial \theta} =0\<br>
+\end{aligned} 
+\right. \tag{3}
+$$</p>
+<h2 id="2-map最大后验估计">2. MAP，最大后验估计</h2>
+<p>MAP寻求的是能使后验概率$P(\theta \mid X)$最大的 $\theta$ 值:
+$$
+\begin{aligned}
+\operatorname{argmax}p(\theta \mid X) &amp;=\operatorname{argmax} \frac{p(X \mid \theta) p(\theta)}{p(X)} \<br>
+&amp;=\operatorname{argmax}p(X \mid \theta) p(\theta)\<br>
+&amp;=\operatorname{argmax}\left(\prod_{x_1}^{x_n} p(x_i \mid \theta)\right) p(\theta)
+\end{aligned} \tag{4}
+<br>
+$$
+省略$P(X)$是因为$X$与$\theta$无关。对数化处理后，上式可表达为：
+$$
+\operatorname{argmax}\left(\sum_{x_1}^{x_n} \log p(x_i \mid \theta)+\log p(\theta)\right) \tag{5}
+<br>
+$$
+相比于式（2），式（4）仅仅是多了一项 $p(\theta)$ ，这就是参数$\theta$的**先验分布**。在实际中，当人们已经接受或知道的普遍的规律时，可以对预先给出这一规律。比如在扔硬币的试验中，每次抛出正面发生的概率应该服从一个概率分布，且基本在0.5处去最大值，这就是先验分布。对于先验分布，一般会给出一个超参数：
+$$
+p(\theta)=p(\theta \mid \alpha) \tag{6}
+$$
+式（7）中超参数的求解，与极大似然估计一样，求导等于0。</p>
+<h2 id="3-贝叶斯估计">3. 贝叶斯估计</h2>
+<p>在MLE和MAP中，都是通过对函数求极值确定参数，都不会考虑$p(X)$；而在贝叶斯估计中，不再考虑极值，而是使用$$p(X)$$ 直接取出$p(\theta \mid X)$：
+$$
+p(\theta \mid X)=\frac{p(X \mid \theta) p(\theta)}{p(X)} \tag{7}
+$$
+然后对于一个样本$x$，可计算其概率：
+$$
+p(x \mid X)=\int_{\theta \in \Theta}p(x \mid \theta)p(\theta \mid X)\operatorname{d}\theta \tag{8}
+$$</p>
+<h2 id="参考">参考</h2>
+<p>[1] <a href="https://blog.csdn.net/pipisorry/article/details/51471222">https://blog.csdn.net/pipisorry/article/details/51471222</a></p>
 
 </article>
 

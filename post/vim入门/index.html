@@ -4,7 +4,7 @@
     <meta name="theme-color" content="#000" />
     <title>
         
-            About &middot; My New Hugo Site Hugo Theme - Prav
+            Vim 入门 &middot; My New Hugo Site Hugo Theme - Prav
         
     </title>
 
@@ -121,11 +121,47 @@
 </div>
 
 <article>
-    <h1><a href="https://drjasonhan.github.io/about/">About</a></h1>
+    <h1><a href="https://drjasonhan.github.io/post/vim%E5%85%A5%E9%97%A8/">Vim 入门</a></h1>
     <div class="tags">
         
     </div>
-    <h1 id="关于">关于</h1>
+    <h2 id="1-基础篇">1. 基础篇·</h2>
+<ol>
+<li><strong>移动光标</strong> 在 Normal 模式下，hjkl分别对应前、下、上和后。</li>
+<li><strong>模式切换</strong> 在任何模式下，点击esc都可以切换回 Normal模式；在Normal模式下，点击i(英文状态下)可以进入Insert模式； Normal 模式下 输入: 转入扩展命令模式。</li>
+<li><strong>退出</strong> 在扩展命令模式下输入 q</li>
+<li><strong>保存退出</strong> 在扩展命令模式下输入 wq</li>
+<li><strong>把光标移动到文档的第一行</strong> Normal 模式下 gg</li>
+<li><strong>把光标移动到文档最后一行</strong> Normal 模式下 shift+g</li>
+<li><strong>剪切</strong>
+<ol>
+<li><strong>剪切光标所在的行</strong> dd</li>
+<li><strong>剪切光标一下n行</strong> n+dd</li>
+</ol>
+</li>
+<li><strong>粘贴</strong> p</li>
+<li><strong>复制</strong>
+<ol>
+<li><strong>复制光标所在行</strong> yy</li>
+<li><strong>复制光标一下n行</strong> n+yy</li>
+</ol>
+</li>
+<li><strong>删除</strong> 同剪切一样 dd</li>
+<li></li>
+</ol>
+<h2 id="2-常见问题">2. 常见问题</h2>
+<ol>
+<li><strong>在vscdode中配置vim</strong>
+打开settings，通过json文件配置，增加
+<pre><code>&quot;vim.insertModeKeyBindings&quot;: [
+     {&quot;before&quot;: [
+         &quot;j&quot;,
+         &quot;j&quot;],
+     &quot;after&quot;: [&quot;&lt;esc&gt;&quot;]}
+ ]
+</code></pre><p>before 和 after 建立了一对映射，当输入jj时，相当于按了esc键</p>
+</li>
+</ol>
 
 </article>
 
