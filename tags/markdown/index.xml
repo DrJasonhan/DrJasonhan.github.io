@@ -19,5 +19,14 @@
 </description>
     </item>
     
+    <item>
+      <title>Git 常用命令</title>
+      <link>https://drjasonhan.github.io/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Wed, 07 Oct 2020 14:55:57 +0800</pubDate>
+      
+      <guid>https://drjasonhan.github.io/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <description>一、常用命令  撤销更改 git checkout -- &amp;lt;file&amp;gt;。 初始化 git init。 建立与远程仓库的连接 git remote add origin git@github.com:XXXXXXXX.git,其中，remote 即远程；origin 是后面 github 地址的名称，也可自定义成其他名称；本地仓库可以 add 多个远程仓库，推送代码时可指定远程仓库推送。 查看当前远程仓库地址 git remote -v 创建文件 touch 文件名，示例：touch testfile.txt。 暂存文件 add 文件名，示例：git add .其中点 . 代表所有文件。 提交到本地的版本库 git commit -m&amp;quot;添加说明&amp;quot;，示例：git commit -m &amp;quot;修改了XX中的bug&amp;quot;，其中，-m 中的 m 代表 message。  二、问题汇总  git push -u origin master 与 git push origin master 的区别 git push origin master 推送到指定的远程仓库名(origin)的指定分支(master)。当只关联一个远程且只有一个分支时，其可以简写为 git push。但是，当关联了多个远程仓库、有多个分支时，直接用简化的语句可能会报错。 git push -u origin master 的完全版为 git push &amp;ndash;set-upstream origin master。指将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push了。 单杠-和双杠&amp;ndash;的区别 在命令行中，单杠-后面接的是缩写，双杠&amp;ndash;后面要接全称 在 GitHub 中，markdonw文件里的公式不能正常显示怎么办？ 在 Google Chrome 中添加插件(https://chrome.</description>
+    </item>
+    
   </channel>
 </rss>
