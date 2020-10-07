@@ -9,6 +9,16 @@
     <lastBuildDate>Wed, 07 Oct 2020 19:01:53 +0800</lastBuildDate><atom:link href="https://drjasonhan.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vim 入门</title>
+      <link>https://drjasonhan.github.io/post/vim%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Wed, 07 Oct 2020 19:01:53 +0800</pubDate>
+      
+      <guid>https://drjasonhan.github.io/post/vim%E5%85%A5%E9%97%A8/</guid>
+      <description>1. 基础篇·  移动光标 在 Normal 模式下，hjkl分别对应前、下、上和后。 模式切换 在任何模式下，点击esc都可以切换回 Normal模式；在Normal模式下，点击i(英文状态下)可以进入Insert模式； Normal 模式下 输入: 转入扩展命令模式。 退出 在扩展命令模式下输入 q 保存退出 在扩展命令模式下输入 wq 把光标移动到文档的第一行 Normal 模式下 gg 把光标移动到文档最后一行 Normal 模式下 shift+g 剪切  剪切光标所在的行 dd 剪切光标一下n行 n+dd   粘贴 p 复制  复制光标所在行 yy 复制光标一下n行 n+yy   删除 同剪切一样 dd   2. 常见问题  在vscdode中配置vim 打开settings，通过json文件配置，增加 &amp;quot;vim.insertModeKeyBindings&amp;quot;: [{&amp;quot;before&amp;quot;: [&amp;quot;j&amp;quot;,&amp;quot;j&amp;quot;],&amp;quot;after&amp;quot;: [&amp;quot;&amp;lt;esc&amp;gt;&amp;quot;]}]before 和 after 建立了一对映射，当输入jj时，相当于按了esc键
+  </description>
+    </item>
+    
+    <item>
+      <title>Vim 入门</title>
       <link>https://drjasonhan.github.io/posts/vim%E5%85%A5%E9%97%A8/</link>
       <pubDate>Wed, 07 Oct 2020 19:01:53 +0800</pubDate>
       
