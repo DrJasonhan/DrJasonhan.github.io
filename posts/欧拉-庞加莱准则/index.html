@@ -4,7 +4,7 @@
     <meta name="theme-color" content="#000" />
     <title>
         
-            Vim 入门 &middot;  Jason Han&#39;s Blog
+            欧拉-庞加莱准则 &middot;  Jason Han&#39;s Blog
         
     </title>
 
@@ -29,7 +29,7 @@
     
 
     
-    <meta name="keywords" content="vim">
+    <meta name="keywords" content="model">
     
     <meta name="author" content="Jason Han"></head>
 <body>
@@ -111,50 +111,21 @@
 </div>
 
 <article>
-    <h1><a href="https://drjasonhan.github.io/post/vim%E5%85%A5%E9%97%A8/">Vim 入门</a></h1>
+    <h1><a href="https://drjasonhan.github.io/posts/%E6%AC%A7%E6%8B%89-%E5%BA%9E%E5%8A%A0%E8%8E%B1%E5%87%86%E5%88%99/">欧拉-庞加莱准则</a></h1>
     <div class="tags">
         
         
-        <a href="/tags/vim" class="pure-button">vim</a>
+        <a href="/tags/model" class="pure-button">model</a>
         
     </div>
-    <h2 id="1-基础篇">1. 基础篇·</h2>
-<ol>
-<li><strong>移动光标</strong> 在 Normal 模式下，hjkl分别对应前、下、上和后。</li>
-<li><strong>模式切换</strong> 在任何模式下，点击esc都可以切换回 Normal模式；在Normal模式下，点击i(英文状态下)可以进入Insert模式； Normal 模式下 输入: 转入扩展命令模式。</li>
-<li><strong>退出</strong> 在扩展命令模式下输入 q</li>
-<li><strong>保存退出</strong> 在扩展命令模式下输入 wq</li>
-<li><strong>把光标移动到文档的第一行</strong> Normal 模式下 gg</li>
-<li><strong>把光标移动到文档最后一行</strong> Normal 模式下 shift+g</li>
-<li><strong>剪切</strong>
-<ol>
-<li><strong>剪切光标所在的行</strong> dd</li>
-<li><strong>剪切光标一下n行</strong> n+dd</li>
-</ol>
-</li>
-<li><strong>粘贴</strong> p</li>
-<li><strong>复制</strong>
-<ol>
-<li><strong>复制光标所在行</strong> yy</li>
-<li><strong>复制光标一下n行</strong> n+yy</li>
-</ol>
-</li>
-<li><strong>删除</strong> 同剪切一样 dd</li>
-<li></li>
-</ol>
-<h2 id="2-常见问题">2. 常见问题</h2>
-<ol>
-<li><strong>在vscdode中配置vim</strong>
-打开settings，通过json文件配置，增加
-<pre><code>&quot;vim.insertModeKeyBindings&quot;: [
-     {&quot;before&quot;: [
-         &quot;j&quot;,
-         &quot;j&quot;],
-     &quot;after&quot;: [&quot;&lt;esc&gt;&quot;]}
- ]
-</code></pre><p>before 和 after 建立了一对映射，当输入jj时，相当于按了esc键</p>
-</li>
-</ol>
+    <p>最近投了一篇水工岩体随机裂隙网络建模的论文，其中有一部分内容是裂隙切割岩体成多面块体。审稿人评论需要证明符合“<strong>欧拉-庞加莱准则</strong>”。经过大量搜索发现中文的相关内容很少，遂进行了查阅，做了如下总结。</p>
+<h2 id="1-欧拉-庞加莱准则的主要内容">1. 欧拉-庞加莱准则的主要内容</h2>
+<p>欧拉-庞加莱准则（或公式）是描述流形的顶点、边、面的个数之间的关系的等式。公式如下：
+$
+V-E+F+(L-F)-2(S-G)=0
+$
+其中，V代表顶点的个数、E代表边的个数、F为面的个数、G代表实体中洞的个数（genus，亏格）、S为外壳（Shell）的数量</p>
+<p>老师博士论文P28 欧拉公式不太一样</p>
 
 </article>
 
@@ -177,37 +148,37 @@
             <ul class="pure-menu-list">
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/github%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%85%AC%E9%92%A5/" class="pure-menu-link">GitHub 如何配置SSH密钥<br>
+                    <a href="https://drjasonhan.github.io/posts/github%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%85%AC%E9%92%A5/" class="pure-menu-link">GitHub 如何配置SSH密钥<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/" class="pure-menu-link">Mermaid绘图基础<br>
+                    <a href="https://drjasonhan.github.io/posts/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/" class="pure-menu-link">Mermaid绘图基础<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/vim%E5%85%A5%E9%97%A8/" class="pure-menu-link">Vim 入门<br>
+                    <a href="https://drjasonhan.github.io/posts/vim%E5%85%A5%E9%97%A8/" class="pure-menu-link">Vim 入门<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/%E6%AC%A7%E6%8B%89-%E5%BA%9E%E5%8A%A0%E8%8E%B1%E5%87%86%E5%88%99/" class="pure-menu-link">欧拉-庞加莱准则<br>
+                    <a href="https://drjasonhan.github.io/posts/%E6%AC%A7%E6%8B%89-%E5%BA%9E%E5%8A%A0%E8%8E%B1%E5%87%86%E5%88%99/" class="pure-menu-link">欧拉-庞加莱准则<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3mlemap%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" class="pure-menu-link">重新理解MLE，MAP和贝叶斯估计<br>
+                    <a href="https://drjasonhan.github.io/posts/%E7%90%86%E8%A7%A3mlemap%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" class="pure-menu-link">重新理解MLE，MAP和贝叶斯估计<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="pure-menu-link">Git 常用命令<br>
+                    <a href="https://drjasonhan.github.io/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="pure-menu-link">Git 常用命令<br>
                         <small></small>
                     </a>
                 </li>

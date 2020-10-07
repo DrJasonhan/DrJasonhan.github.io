@@ -4,7 +4,7 @@
     <meta name="theme-color" content="#000" />
     <title>
         
-            Vim 入门 &middot;  Jason Han&#39;s Blog
+            Git 常用命令 &middot;  Jason Han&#39;s Blog
         
     </title>
 
@@ -29,7 +29,7 @@
     
 
     
-    <meta name="keywords" content="vim">
+    <meta name="keywords" content="git">
     
     <meta name="author" content="Jason Han"></head>
 <body>
@@ -111,49 +111,37 @@
 </div>
 
 <article>
-    <h1><a href="https://drjasonhan.github.io/post/vim%E5%85%A5%E9%97%A8/">Vim 入门</a></h1>
+    <h1><a href="https://drjasonhan.github.io/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Git 常用命令</a></h1>
     <div class="tags">
         
         
-        <a href="/tags/vim" class="pure-button">vim</a>
+        <a href="/tags/git" class="pure-button">git</a>
         
     </div>
-    <h2 id="1-基础篇">1. 基础篇·</h2>
+    <h2 id="一常用命令">一、常用命令</h2>
 <ol>
-<li><strong>移动光标</strong> 在 Normal 模式下，hjkl分别对应前、下、上和后。</li>
-<li><strong>模式切换</strong> 在任何模式下，点击esc都可以切换回 Normal模式；在Normal模式下，点击i(英文状态下)可以进入Insert模式； Normal 模式下 输入: 转入扩展命令模式。</li>
-<li><strong>退出</strong> 在扩展命令模式下输入 q</li>
-<li><strong>保存退出</strong> 在扩展命令模式下输入 wq</li>
-<li><strong>把光标移动到文档的第一行</strong> Normal 模式下 gg</li>
-<li><strong>把光标移动到文档最后一行</strong> Normal 模式下 shift+g</li>
-<li><strong>剪切</strong>
-<ol>
-<li><strong>剪切光标所在的行</strong> dd</li>
-<li><strong>剪切光标一下n行</strong> n+dd</li>
+<li><strong>撤销更改</strong> <code>git checkout -- &lt;file&gt;</code>。</li>
+<li><strong>初始化</strong> <code>git init</code>。</li>
+<li><strong>建立与远程仓库的连接</strong> <code>git remote add origin git@github.com:XXXXXXXX.git</code>,其中，remote 即远程；origin 是后面 github 地址的名称，也可自定义成其他名称；本地仓库可以 add 多个远程仓库，推送代码时可指定远程仓库推送。</li>
+<li><strong>查看当前远程仓库地址</strong> <code>git remote -v</code></li>
+<li><strong>创建文件</strong> touch 文件名，示例：<code>touch testfile.txt</code>。</li>
+<li><strong>暂存文件</strong> add 文件名，示例：<code>git add .</code>其中点 . 代表所有文件。</li>
+<li><strong>提交到本地的版本库</strong> git commit -m&quot;添加说明&quot;，示例：<code>git commit -m &quot;修改了XX中的bug&quot;</code>，其中，-m 中的 m 代表 message。</li>
 </ol>
-</li>
-<li><strong>粘贴</strong> p</li>
-<li><strong>复制</strong>
+<h2 id="二问题汇总">二、问题汇总</h2>
 <ol>
-<li><strong>复制光标所在行</strong> yy</li>
-<li><strong>复制光标一下n行</strong> n+yy</li>
-</ol>
-</li>
-<li><strong>删除</strong> 同剪切一样 dd</li>
-<li></li>
-</ol>
-<h2 id="2-常见问题">2. 常见问题</h2>
-<ol>
-<li><strong>在vscdode中配置vim</strong>
-打开settings，通过json文件配置，增加
-<pre><code>&quot;vim.insertModeKeyBindings&quot;: [
-     {&quot;before&quot;: [
-         &quot;j&quot;,
-         &quot;j&quot;],
-     &quot;after&quot;: [&quot;&lt;esc&gt;&quot;]}
- ]
-</code></pre><p>before 和 after 建立了一对映射，当输入jj时，相当于按了esc键</p>
-</li>
+<li><strong>git push -u origin master 与 git push origin master 的区别</strong>
+git push origin master 推送到指定的远程仓库名(origin)的指定分支(master)。当只关联一个远程且只有一个分支时，其可以简写为 <strong>git push</strong>。但是，当关联了多个远程仓库、有多个分支时，直接用简化的语句可能会报错。
+git push -u origin master 的完全版为 git push &ndash;set-upstream origin master。指将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push了。</li>
+<li><strong>单杠-和双杠&ndash;的区别</strong>
+在命令行中，单杠-后面接的是缩写，双杠&ndash;后面要接全称</li>
+<li><strong>在 GitHub 中，markdonw文件里的公式不能正常显示怎么办？</strong>
+在 Google Chrome 中添加插件(<a href="https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima/related">https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima/related</a>)</li>
+<li><strong>当本地与远程仓库冲突时，如何合并</strong> 先 <code>git pull</code>，然后手动在代码中进行修改，然后 <code>git push</code>。其中 <code>git pull</code> 相当于<code>git fetch</code>+<code>git merge</code>。</li>
+<li><strong>如何脱离鼠标打开 git bash</strong> <code>Shift+F10</code>进入右键命令，<code>s</code>选中Git Bash，在<code>Enter</code>进入命令行。</li>
+<li><strong>pull 时出现 fatal: refusing to merge unrelated histories</strong> 这是因为远程仓库已经存在代码记录了，并且这部分代码没有和本地仓库关联。默认情况下，不允许拉取未关联到的旧代码。解决方式有两种：
+(1) <code>git pull origin master --allow-unrelated-histories</code>
+(2) 先删除旧的 .git 文件，再init一个新的，然后不要add和commit，直接pull。</li>
 </ol>
 
 </article>
@@ -177,37 +165,37 @@
             <ul class="pure-menu-list">
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/github%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%85%AC%E9%92%A5/" class="pure-menu-link">GitHub 如何配置SSH密钥<br>
+                    <a href="https://drjasonhan.github.io/posts/github%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%85%AC%E9%92%A5/" class="pure-menu-link">GitHub 如何配置SSH密钥<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/" class="pure-menu-link">Mermaid绘图基础<br>
+                    <a href="https://drjasonhan.github.io/posts/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/" class="pure-menu-link">Mermaid绘图基础<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/vim%E5%85%A5%E9%97%A8/" class="pure-menu-link">Vim 入门<br>
+                    <a href="https://drjasonhan.github.io/posts/vim%E5%85%A5%E9%97%A8/" class="pure-menu-link">Vim 入门<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/%E6%AC%A7%E6%8B%89-%E5%BA%9E%E5%8A%A0%E8%8E%B1%E5%87%86%E5%88%99/" class="pure-menu-link">欧拉-庞加莱准则<br>
+                    <a href="https://drjasonhan.github.io/posts/%E6%AC%A7%E6%8B%89-%E5%BA%9E%E5%8A%A0%E8%8E%B1%E5%87%86%E5%88%99/" class="pure-menu-link">欧拉-庞加莱准则<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3mlemap%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" class="pure-menu-link">重新理解MLE，MAP和贝叶斯估计<br>
+                    <a href="https://drjasonhan.github.io/posts/%E7%90%86%E8%A7%A3mlemap%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" class="pure-menu-link">重新理解MLE，MAP和贝叶斯估计<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="pure-menu-link">Git 常用命令<br>
+                    <a href="https://drjasonhan.github.io/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="pure-menu-link">Git 常用命令<br>
                         <small></small>
                     </a>
                 </li>

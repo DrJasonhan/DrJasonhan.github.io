@@ -4,7 +4,7 @@
     <meta name="theme-color" content="#000" />
     <title>
         
-            Vim 入门 &middot;  Jason Han&#39;s Blog
+            Mermaid绘图基础 &middot;  Jason Han&#39;s Blog
         
     </title>
 
@@ -29,7 +29,7 @@
     
 
     
-    <meta name="keywords" content="vim">
+    <meta name="keywords" content="markdown">
     
     <meta name="author" content="Jason Han"></head>
 <body>
@@ -111,51 +111,38 @@
 </div>
 
 <article>
-    <h1><a href="https://drjasonhan.github.io/post/vim%E5%85%A5%E9%97%A8/">Vim 入门</a></h1>
+    <h1><a href="https://drjasonhan.github.io/posts/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/">Mermaid绘图基础</a></h1>
     <div class="tags">
         
         
-        <a href="/tags/vim" class="pure-button">vim</a>
+        <a href="/tags/markdown" class="pure-button">markdown</a>
         
     </div>
-    <h2 id="1-基础篇">1. 基础篇·</h2>
-<ol>
-<li><strong>移动光标</strong> 在 Normal 模式下，hjkl分别对应前、下、上和后。</li>
-<li><strong>模式切换</strong> 在任何模式下，点击esc都可以切换回 Normal模式；在Normal模式下，点击i(英文状态下)可以进入Insert模式； Normal 模式下 输入: 转入扩展命令模式。</li>
-<li><strong>退出</strong> 在扩展命令模式下输入 q</li>
-<li><strong>保存退出</strong> 在扩展命令模式下输入 wq</li>
-<li><strong>把光标移动到文档的第一行</strong> Normal 模式下 gg</li>
-<li><strong>把光标移动到文档最后一行</strong> Normal 模式下 shift+g</li>
-<li><strong>剪切</strong>
-<ol>
-<li><strong>剪切光标所在的行</strong> dd</li>
-<li><strong>剪切光标一下n行</strong> n+dd</li>
+    <p>#Mermaid绘图基础
+在 Markdown 中进行简易的流程图绘制，最常用的就是Mermaid。</p>
+<h2 id="1-基本语法">1. 基本语法</h2>
+<p>Mermaid制作流程图的基本语法格式如下：</p>
+<pre><code>​```mermaid
+graph 方向;
+开始--&gt;结束;
+```
+</code></pre><ol>
+<li>方向可以为TB(从上到下)、LR(从左到右)、RL(从右到左)、BT(从下到上)</li>
+<li>“开始”和“结束”都代表流程图中的标签，标签的格式为<code>id[显示内容]</code>，这里的方括号代表标签的图形为直角方框，也可以换成圆括号，图形将会变成圆角方框。
+示例：</li>
 </ol>
-</li>
-<li><strong>粘贴</strong> p</li>
-<li><strong>复制</strong>
-<ol>
-<li><strong>复制光标所在行</strong> yy</li>
-<li><strong>复制光标一下n行</strong> n+yy</li>
-</ol>
-</li>
-<li><strong>删除</strong> 同剪切一样 dd</li>
-<li></li>
-</ol>
-<h2 id="2-常见问题">2. 常见问题</h2>
-<ol>
-<li><strong>在vscdode中配置vim</strong>
-打开settings，通过json文件配置，增加
-<pre><code>&quot;vim.insertModeKeyBindings&quot;: [
-     {&quot;before&quot;: [
-         &quot;j&quot;,
-         &quot;j&quot;],
-     &quot;after&quot;: [&quot;&lt;esc&gt;&quot;]}
- ]
-</code></pre><p>before 和 after 建立了一对映射，当输入jj时，相当于按了esc键</p>
-</li>
-</ol>
+<pre><code>```mermaid
+graph LR;
+A[&quot;开始&quot;]--&gt;B(&quot;结束&quot;);
+```
+</code></pre><p>显示为：
+​```mermaid
+graph LR;
+A[&ldquo;开始&rdquo;]&ndash;&gt;B(&ldquo;结束&rdquo;);</p>
+<pre><code>
 
+
+</code></pre>
 </article>
 
     </div>
@@ -177,37 +164,37 @@
             <ul class="pure-menu-list">
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/github%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%85%AC%E9%92%A5/" class="pure-menu-link">GitHub 如何配置SSH密钥<br>
+                    <a href="https://drjasonhan.github.io/posts/github%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%85%AC%E9%92%A5/" class="pure-menu-link">GitHub 如何配置SSH密钥<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/" class="pure-menu-link">Mermaid绘图基础<br>
+                    <a href="https://drjasonhan.github.io/posts/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/" class="pure-menu-link">Mermaid绘图基础<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/vim%E5%85%A5%E9%97%A8/" class="pure-menu-link">Vim 入门<br>
+                    <a href="https://drjasonhan.github.io/posts/vim%E5%85%A5%E9%97%A8/" class="pure-menu-link">Vim 入门<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/%E6%AC%A7%E6%8B%89-%E5%BA%9E%E5%8A%A0%E8%8E%B1%E5%87%86%E5%88%99/" class="pure-menu-link">欧拉-庞加莱准则<br>
+                    <a href="https://drjasonhan.github.io/posts/%E6%AC%A7%E6%8B%89-%E5%BA%9E%E5%8A%A0%E8%8E%B1%E5%87%86%E5%88%99/" class="pure-menu-link">欧拉-庞加莱准则<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3mlemap%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" class="pure-menu-link">重新理解MLE，MAP和贝叶斯估计<br>
+                    <a href="https://drjasonhan.github.io/posts/%E7%90%86%E8%A7%A3mlemap%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" class="pure-menu-link">重新理解MLE，MAP和贝叶斯估计<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="pure-menu-link">Git 常用命令<br>
+                    <a href="https://drjasonhan.github.io/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="pure-menu-link">Git 常用命令<br>
                         <small></small>
                     </a>
                 </li>

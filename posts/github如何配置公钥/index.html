@@ -4,7 +4,7 @@
     <meta name="theme-color" content="#000" />
     <title>
         
-            Vim 入门 &middot;  Jason Han&#39;s Blog
+            GitHub 如何配置SSH密钥 &middot;  Jason Han&#39;s Blog
         
     </title>
 
@@ -29,7 +29,7 @@
     
 
     
-    <meta name="keywords" content="vim">
+    <meta name="keywords" content="git">
     
     <meta name="author" content="Jason Han"></head>
 <body>
@@ -111,49 +111,50 @@
 </div>
 
 <article>
-    <h1><a href="https://drjasonhan.github.io/post/vim%E5%85%A5%E9%97%A8/">Vim 入门</a></h1>
+    <h1><a href="https://drjasonhan.github.io/posts/github%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%85%AC%E9%92%A5/">GitHub 如何配置SSH密钥</a></h1>
     <div class="tags">
         
         
-        <a href="/tags/vim" class="pure-button">vim</a>
+        <a href="/tags/git" class="pure-button">git</a>
         
     </div>
-    <h2 id="1-基础篇">1. 基础篇·</h2>
+    <p>GitHub 如何配置SSH密钥</p>
+<h2 id="1-ssh-是什么">1. SSH 是什么</h2>
+<p>SSH（Security shell, 安全外壳协议），是一种加密的网络传输协议，可以再不安全的网络中为网络服务提供安全的传输环境。SSH通过在网路中建立安全隧道来实现客户端与服务器之间的连接<font size=1.5><a href="https://zh.wikipedia.org/wiki/Secure_Shell">[参考]</a></font>。</p>
+<h2 id="2-github管理项目的两种方式-font-size15参考httpswwwcnblogscomayseeingp3572582htmlfont">2. GitHub管理项目的两种方式 <font size=1.5><a href="https://www.cnblogs.com/ayseeing/p/3572582.html">[参考]</a></font></h2>
+<p>一种是直接使用 https url 克隆到本地，一种是使用SSH url 克隆到本地。对于初学者，使用https url比较方便，而在使用SSH之前，却需要先在本地配置好SSH Key。同时，如果想使用SSH url克隆，你必须是项目的拥有者，否则无法添加SSH key。
+在clone项目时，使用https url可以随意clone；而使用SSH时，条件是自己是该项目的拥有者或管理员。
+在push代码时，https url需要验证用户名和密码；SSH则不需要输入用户名，因为已经通过公钥和私钥在GitHub服务器上进行了定向的识别，如果设置了密码，则需要设置密码，也可以不设置。<font size=1.5>注：公钥是给服务器的，在生成密钥的时候，XXX.pub是公钥，XXX则是对应的私钥，一般存放在C:\Users\xxx.ssh里面<a href="https://blog.csdn.net/wj123446/article/details/52781214">[参考]</a></font></p>
+<h2 id="3-如何生成密钥">3. 如何生成密钥</h2>
+<p><strong>1. 验证是否存在密钥</strong>
+打开 git bash，输入</p>
+<pre><code>$ cd ~/.ssh
+$ ls
+</code></pre><p>第一句是转到SSH所在的文件夹，如果本地已经存在了密钥，命令行则会直接转到~/.ssh。ls是显示当前路径下的所有文件，与Linux中的命令相同。如果存在密钥，则会显示id_rsa_pub或id_dsa.pub。
+<strong>2. 创建一个SSH Key</strong>
+<code>$ ssh-keygen -t rsa -C&quot;email@example.com&quot;</code>
+其中，-t 制定密钥的类型，默认是rsa，可以省略。
+-C 设置注释文字，比如邮箱
+-f 制定密钥文件存储文件名。
+以上代码省略了-f参数，运行后会让你输入文件名，用于保存刚才生成的SSH Key，如：</p>
+<pre><code>Generating public/private rsa key pair.
+# Enter file in which to save the key (/c/Users/you/.ssh/id_rsa): [Press enter]
+</code></pre><p>也可以不输入文件名，直接回车，则会生成默认的密钥文件id_rsa.pub(公钥)和id_rsa(私钥)。
+之后，会提示输入两次密码，注意，该密码是push文件的时候需要输入的，而不是GitHub管理者的密码。也可以不输入密码，直接回车，这样在push的时候就不需要输入密码，直接push了。
+当代码如下提示，说明生成成功。</p>
+<pre><code>Your identification has been saved in /c/Users/you/.ssh/id_rsa.
+Your public key has been saved in /c/Users/you/.ssh/id_rsa.pub.
+</code></pre><p>接下来，输入：
+<code>cat ~/.ssh/id_rsa.pub</code>
+会显示当前已经生成的公钥，将其选中并复制到剪切板。</p>
+<h2 id="4-如何将公钥添加到github中">4. 如何将公钥添加到GitHub中</h2>
 <ol>
-<li><strong>移动光标</strong> 在 Normal 模式下，hjkl分别对应前、下、上和后。</li>
-<li><strong>模式切换</strong> 在任何模式下，点击esc都可以切换回 Normal模式；在Normal模式下，点击i(英文状态下)可以进入Insert模式； Normal 模式下 输入: 转入扩展命令模式。</li>
-<li><strong>退出</strong> 在扩展命令模式下输入 q</li>
-<li><strong>保存退出</strong> 在扩展命令模式下输入 wq</li>
-<li><strong>把光标移动到文档的第一行</strong> Normal 模式下 gg</li>
-<li><strong>把光标移动到文档最后一行</strong> Normal 模式下 shift+g</li>
-<li><strong>剪切</strong>
-<ol>
-<li><strong>剪切光标所在的行</strong> dd</li>
-<li><strong>剪切光标一下n行</strong> n+dd</li>
-</ol>
-</li>
-<li><strong>粘贴</strong> p</li>
-<li><strong>复制</strong>
-<ol>
-<li><strong>复制光标所在行</strong> yy</li>
-<li><strong>复制光标一下n行</strong> n+yy</li>
-</ol>
-</li>
-<li><strong>删除</strong> 同剪切一样 dd</li>
-<li></li>
-</ol>
-<h2 id="2-常见问题">2. 常见问题</h2>
-<ol>
-<li><strong>在vscdode中配置vim</strong>
-打开settings，通过json文件配置，增加
-<pre><code>&quot;vim.insertModeKeyBindings&quot;: [
-     {&quot;before&quot;: [
-         &quot;j&quot;,
-         &quot;j&quot;],
-     &quot;after&quot;: [&quot;&lt;esc&gt;&quot;]}
- ]
-</code></pre><p>before 和 after 建立了一对映射，当输入jj时，相当于按了esc键</p>
-</li>
+<li>登录GitHub并进入项目；</li>
+<li>点击右上角的账户，并进入Settings；</li>
+<li>在左边栏点击SSH and GPG keys；</li>
+<li>点击右上角New SSH key；</li>
+<li>将之前复制的公钥粘贴到Key文本框中；</li>
+<li>点击Add SSH key，完成。</li>
 </ol>
 
 </article>
@@ -177,37 +178,37 @@
             <ul class="pure-menu-list">
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/github%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%85%AC%E9%92%A5/" class="pure-menu-link">GitHub 如何配置SSH密钥<br>
+                    <a href="https://drjasonhan.github.io/posts/github%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%85%AC%E9%92%A5/" class="pure-menu-link">GitHub 如何配置SSH密钥<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/" class="pure-menu-link">Mermaid绘图基础<br>
+                    <a href="https://drjasonhan.github.io/posts/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/" class="pure-menu-link">Mermaid绘图基础<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/vim%E5%85%A5%E9%97%A8/" class="pure-menu-link">Vim 入门<br>
+                    <a href="https://drjasonhan.github.io/posts/vim%E5%85%A5%E9%97%A8/" class="pure-menu-link">Vim 入门<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/%E6%AC%A7%E6%8B%89-%E5%BA%9E%E5%8A%A0%E8%8E%B1%E5%87%86%E5%88%99/" class="pure-menu-link">欧拉-庞加莱准则<br>
+                    <a href="https://drjasonhan.github.io/posts/%E6%AC%A7%E6%8B%89-%E5%BA%9E%E5%8A%A0%E8%8E%B1%E5%87%86%E5%88%99/" class="pure-menu-link">欧拉-庞加莱准则<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3mlemap%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" class="pure-menu-link">重新理解MLE，MAP和贝叶斯估计<br>
+                    <a href="https://drjasonhan.github.io/posts/%E7%90%86%E8%A7%A3mlemap%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" class="pure-menu-link">重新理解MLE，MAP和贝叶斯估计<br>
                         <small></small>
                     </a>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="pure-menu-link">Git 常用命令<br>
+                    <a href="https://drjasonhan.github.io/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="pure-menu-link">Git 常用命令<br>
                         <small></small>
                     </a>
                 </li>
