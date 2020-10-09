@@ -283,12 +283,15 @@ A[&ldquo;开始&rdquo;]&ndash;&gt;B(&ldquo;结束&rdquo;);</p>
         
     </div>
     <p>最近投了一篇水工岩体随机裂隙网络建模的论文，其中有一部分内容是裂隙切割岩体成多面块体。审稿人评论需要证明符合“<strong>欧拉-庞加莱准则</strong>”。经过大量搜索发现中文的相关内容很少，遂进行了查阅，做了如下总结。</p>
-<h2 id="1-欧拉-庞加莱准则的主要内容">1. 欧拉-庞加莱准则的主要内容</h2>
+
+<h2 id="1-欧拉庞加莱准则的主要内容">1. 欧拉-庞加莱准则的主要内容</h2>
+
 <p>欧拉-庞加莱准则（或公式）是描述流形的顶点、边、面的个数之间的关系的等式。公式如下：
-$
+<span  class="math">\(
 V-E+F+(L-F)-2(S-G)=0
-$
+\)</span>
 其中，V代表顶点的个数、E代表边的个数、F为面的个数、G代表实体中洞的个数（genus，亏格）、S为外壳（Shell）的数量</p>
+
 <p>老师博士论文P28 欧拉公式不太一样</p>
 
 </article>
@@ -312,56 +315,61 @@ $
         
     </div>
     <h2 id="1-mle极大似然估计">1. MLE，极大似然估计</h2>
+
 <p>MLE把带估计的参数看做确定的量，其目标函数是使得以观察到的样本的概率最大：
-$$
+<span  class="math">\(
 \operatorname{argmax}p(X \mid \theta)=\operatorname{argmax}\prod_{x_1}^{x_n} p(x_i \mid \theta) \tag{1}
-$$
+\)</span>
 对数化处理后为：
-$$
+<span  class="math">\(
 \operatorname{argmax}\prod_{x_1}^{x_n} p(x_i \mid \theta)=\operatorname{argmax}\sum_{x_1}^{x_n} \log p(x_i \mid \theta) \tag{2}
-$$
-即：
-$$
-\left{
+\)</span>
+即：</p>
+
+<p><span  class="math">\[
+\left\{
 \begin{aligned}
-&amp;L(\theta) = \sum_{x_1}^{x_n} \log p(x_i \mid \theta)\<br>
-&amp;\frac{\partial L}{\partial \theta} =0\<br>
-\end{aligned} 
-\right. \tag{3}
-$$</p>
+&L(\theta) = \sum_{x_1}^{x_n} \log p(x_i \mid \theta)\\
+&\frac{\partial L}{\partial \theta} =0
+\end{aligned} \right.
+\tag{3}
+\]</span></p>
+
 <h2 id="2-map最大后验估计">2. MAP，最大后验估计</h2>
-<p>MAP寻求的是能使后验概率$P(\theta \mid X)$最大的 $\theta$ 值:
-$$
+
+<p>MAP寻求的是能使后验概率<span  class="math">\(P(\theta \mid X)\)</span>最大的 <span  class="math">\(\theta\)</span> 值:
+<span  class="math">\(
 \begin{aligned}
-\operatorname{argmax}p(\theta \mid X) &amp;=\operatorname{argmax} \frac{p(X \mid \theta) p(\theta)}{p(X)} \<br>
-&amp;=\operatorname{argmax}p(X \mid \theta) p(\theta)\<br>
-&amp;=\operatorname{argmax}\left(\prod_{x_1}^{x_n} p(x_i \mid \theta)\right) p(\theta)
+\operatorname{argmax}p(\theta \mid X) &=\operatorname{argmax} \frac{p(X \mid \theta) p(\theta)}{p(X)} \\
+&=\operatorname{argmax}p(X \mid \theta) p(\theta)\\
+&=\operatorname{argmax}\left(\prod_{x_1}^{x_n} p(x_i \mid \theta)\right) p(\theta)
 \end{aligned} \tag{4}
-<br>
-$$
-省略$P(X)$是因为$X$与$\theta$无关。对数化处理后，上式可表达为：
-$$
+\
+\)</span>
+省略<span  class="math">\(P(X)\)</span>是因为<span  class="math">\(X\)</span>与<span  class="math">\(\theta\)</span>无关。对数化处理后，上式可表达为：
+<span  class="math">\(
 \operatorname{argmax}\left(\sum_{x_1}^{x_n} \log p(x_i \mid \theta)+\log p(\theta)\right) \tag{5}
-<br>
-$$
-相比于式（2），式（4）仅仅是多了一项 $p(\theta)$ ，这就是参数$\theta$的**先验分布**。在实际中，当人们已经接受或知道的普遍的规律时，可以对预先给出这一规律。比如在扔硬币的试验中，每次抛出正面发生的概率应该服从一个概率分布，且基本在0.5处去最大值，这就是先验分布。对于先验分布，一般会给出一个超参数：
-$$
+\
+\)</span>
+相比于式（2），式（4）仅仅是多了一项 <span  class="math">\(p(\theta)\)</span> ，这就是参数<span  class="math">\(\theta\)</span>的<strong>先验分布</strong>。在实际中，当人们已经接受或知道的普遍的规律时，可以对预先给出这一规律。比如在扔硬币的试验中，每次抛出正面发生的概率应该服从一个概率分布，且基本在0.5处去最大值，这就是先验分布。对于先验分布，一般会给出一个超参数：
+<span  class="math">\(
 p(\theta)=p(\theta \mid \alpha) \tag{6}
-$$
+\)</span>
 式（7）中超参数的求解，与极大似然估计一样，求导等于0。</p>
+
 <h2 id="3-贝叶斯估计">3. 贝叶斯估计</h2>
-<p>在MLE和MAP中，都是通过对函数求极值确定参数，都不会考虑$p(X)$；而在贝叶斯估计中，不再考虑极值，而是使用$$p(X)$$ 直接取出$p(\theta \mid X)$：
-$$
+
+<p>在MLE和MAP中，都是通过对函数求极值确定参数，都不会考虑<span  class="math">\(p(X)\)</span>；而在贝叶斯估计中，不再考虑极值，而是使用<span  class="math">\(p(X)\)</span> 直接取出<span  class="math">\(p(\theta \mid X)\)</span>：
+<span  class="math">\(
 p(\theta \mid X)=\frac{p(X \mid \theta) p(\theta)}{p(X)} \tag{7}
-$$
-然后对于一个样本$x$，可计算其概率：
-$$
+\)</span>
+然后对于一个样本<span  class="math">\(x\)</span>，可计算其概率：
+<span  class="math">\(
 p(x \mid X)=\int_{\theta \in \Theta}p(x \mid \theta)p(\theta \mid X)\operatorname{d}\theta \tag{8}
-$$</p>
-<blockquote>
-<p>$p(x \mid X)=\int_{\theta \in \Theta}p(x \mid \theta)p(\theta \mid X)\operatorname{d}\theta \tag{8}$</p>
-</blockquote>
+\)</span></p>
+
 <h2 id="参考">参考</h2>
+
 <p>[1] <a href="https://blog.csdn.net/pipisorry/article/details/51471222">https://blog.csdn.net/pipisorry/article/details/51471222</a></p>
 
 </article>
@@ -518,5 +526,8 @@ git push -u origin master 的完全版为 git push &ndash;set-upstream origin ma
 	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
 		integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
 		crossorigin="anonymous"></script>
-</div></div></body>
+</div>
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script></div></body>
 </html>
