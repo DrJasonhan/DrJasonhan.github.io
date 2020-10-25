@@ -1,32 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>markdown on </title>
-    <link>https://drjasonhan.github.io/tags/markdown/</link>
-    <description>Recent content in markdown on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Wed, 07 Oct 2020 19:01:53 +0800</lastBuildDate><atom:link href="https://drjasonhan.github.io/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Mermaid绘图基础</title>
-      <link>https://drjasonhan.github.io/posts/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/</link>
-      <pubDate>Wed, 07 Oct 2020 19:01:53 +0800</pubDate>
-      
-      <guid>https://drjasonhan.github.io/posts/mermaid%E7%BB%98%E5%9B%BE%E5%9F%BA%E7%A1%80/</guid>
-      <description>#Mermaid绘图基础 在 Markdown 中进行简易的流程图绘制，最常用的就是Mermaid。
-1. 基本语法 Mermaid制作流程图的基本语法格式如下：
-​```mermaidgraph 方向;开始--&amp;gt;结束;``` 方向可以为TB(从上到下)、LR(从左到右)、RL(从右到左)、BT(从下到上) “开始”和“结束”都代表流程图中的标签，标签的格式为id[显示内容]，这里的方括号代表标签的图形为直角方框，也可以换成圆括号，图形将会变成圆角方框。 示例：  ```mermaidgraph LR;A[&amp;quot;开始&amp;quot;]--&amp;gt;B(&amp;quot;结束&amp;quot;);```显示为： ​```mermaid graph LR; A[&amp;ldquo;开始&amp;rdquo;]&amp;ndash;&amp;gt;B(&amp;ldquo;结束&amp;rdquo;);
-</description>
-    </item>
-    
-    <item>
-      <title>Git 常用命令</title>
-      <link>https://drjasonhan.github.io/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
-      <pubDate>Wed, 07 Oct 2020 14:55:57 +0800</pubDate>
-      
-      <guid>https://drjasonhan.github.io/posts/git-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
-      <description>一、常用命令  撤销更改 git checkout -- &amp;lt;file&amp;gt;。 初始化 git init。 建立与远程仓库的连接 git remote add origin git@github.com:XXXXXXXX.git,其中，remote 即远程；origin 是后面 github 地址的名称，也可自定义成其他名称；本地仓库可以 add 多个远程仓库，推送代码时可指定远程仓库推送。 查看当前远程仓库地址 git remote -v 创建文件 touch 文件名，示例：touch testfile.txt。 暂存文件 add 文件名，示例：git add .其中点 . 代表所有文件。 提交到本地的版本库 git commit -m&amp;quot;添加说明&amp;quot;，示例：git commit -m &amp;quot;修改了XX中的bug&amp;quot;，其中，-m 中的 m 代表 message。  二、问题汇总  git push -u origin master 与 git push origin master 的区别 git push origin master 推送到指定的远程仓库名(origin)的指定分支(master)。当只关联一个远程且只有一个分支时，其可以简写为 git push。但是，当关联了多个远程仓库、有多个分支时，直接用简化的语句可能会报错。 git push -u origin master 的完全版为 git push &amp;ndash;set-upstream origin master。指将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push了。 单杠-和双杠&amp;ndash;的区别 在命令行中，单杠-后面接的是缩写，双杠&amp;ndash;后面要接全称 在 GitHub 中，markdonw文件里的公式不能正常显示怎么办？ 在 Google Chrome 中添加插件(https://chrome.</description>
-    </item>
-    
-  </channel>
-</rss>

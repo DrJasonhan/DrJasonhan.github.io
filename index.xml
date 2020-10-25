@@ -1,13 +1,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title> </title>
+        <title>Hugo Theme - Prav </title>
         <link>https://drjasonhan.github.io/</link>
         <language>en-us</language>
-        <author>Jason Han</author>
+        <author>Pravin Paratey</author>
         <rights>(c) 2020</rights>
-        <updated>2020-10-07 19:01:53 &#43;0800 CST</updated>
+        <updated>2020-10-25 11:46:18 &#43;0800 CST</updated>
 
         
+        
+            <item>
+            <title>Posts</title>
+            <link>https://drjasonhan.github.io/post/</link>
+            <pubDate>Sun, 25 Oct 2020 11:46:18 CST</pubDate>
+            <author>Pravin Paratey</author>
+            <guid>https://drjasonhan.github.io/post/</guid>
+            <description></description>
+            </item>
         
         
         
