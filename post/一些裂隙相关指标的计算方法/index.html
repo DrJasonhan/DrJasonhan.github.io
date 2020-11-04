@@ -41,7 +41,7 @@
     </a>
     <ul class="pure-menu-list">
         <li class="pure-menu-item">
-            <a href="/posts" class="pure-menu-link">
+            <a href="/post" class="pure-menu-link">
                 <i class="fa fa-archive"></i>
                 Articles
             </a>
@@ -73,7 +73,7 @@
         
         
         <li class="pure-menu-item">
-            <a href="/posts/index.xml" title="Atom Feed" class="pure-menu-link">
+            <a href="/post/index.xml" title="Atom Feed" class="pure-menu-link">
                 <i class="fas fa-rss-square"></i>
                 <span class="hide">RSS Feed</span>
             </a>
@@ -106,9 +106,9 @@
         
     </div>
     <h2 id="1-psub32sub">1. P<sub>32</sub></h2>
-<p>单位体积岩体内裂隙的总面积。3代表三维，指岩体体积；2代表二维，指裂隙的面积。主要有以下两种计算方式：</p>
+<p>单位体积岩体内裂隙的总面积。3代表三维 ，指岩体体积；2代表二维，指裂隙的面积。主要有以下两种计算方式：</p>
 <h4 id="1-根据钻孔数据计算">(1) 根据钻孔数据计算</h4>
-<img src="E:/自由研究/Blog/blog/content/post/images/钻孔中裂隙示意图.png" width="50%" height="40%" alt="钻孔中裂隙示意图.png" align=center>
+<img src="/img/feature/钻孔中裂隙示意图.png" width="50%" height="40%" alt="钻孔中裂隙示意图.png" align=center>
 <p>计算公式为：</p>
 <p>$
 P_{32}=\frac{\sum_i^n\pi\sigma^2/4/&lt;\omega_i,\alpha&gt;}{L\times\pi\sigma^2/4}=\sum_i^n\frac{1}{L\times&lt;\omega_i,\alpha&gt;}
@@ -149,11 +149,19 @@ $</p>
                     </a>
                 </li>
                 
+                <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3mlemap%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" class="pure-menu-link">重新理解MLE，MAP和贝叶斯估计<br>
+                        <small></small>
+                    </a>
+                </li>
+                
             </ul>
         </div>
 
         <h3>Categories</h3>
         <div style="text-align:center" class="tags">
+            
+            
             
             
             
@@ -174,5 +182,24 @@ $</p>
 	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
 		integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
 		crossorigin="anonymous"></script>
-</div></div></body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+		  tex2jax: {
+			inlineMath: [['$','$'], ['\\(','\\)']],
+			displayMath: [['$$','$$'], ['\[','\]']],
+			processEscapes: true,
+			processEnvironments: true,
+			skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			TeX: { equationNumbers: { autoNumber: "AMS" },
+				 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+		  }
+		});
+		</script>
+		
+		
+
+
+</div>
+</div></body>
 </html>
