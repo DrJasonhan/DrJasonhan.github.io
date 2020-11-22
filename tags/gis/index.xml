@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>工程地质 on Jason Han&#39;s Blog</title>
-    <link>https://drjasonhan.github.io/tags/%E5%B7%A5%E7%A8%8B%E5%9C%B0%E8%B4%A8/</link>
-    <description>Recent content in 工程地质 on Jason Han&#39;s Blog</description>
+    <title>GIS on Jason Han&#39;s Blog</title>
+    <link>https://drjasonhan.github.io/tags/gis/</link>
+    <description>Recent content in GIS on Jason Han&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 10 Nov 2020 11:46:18 +0800</lastBuildDate><atom:link href="https://drjasonhan.github.io/tags/%E5%B7%A5%E7%A8%8B%E5%9C%B0%E8%B4%A8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Nov 2020 11:46:18 +0800</lastBuildDate><atom:link href="https://drjasonhan.github.io/tags/gis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>从 GPS 坐标到工程坐标</title>
       <link>https://drjasonhan.github.io/post/%E4%BB%8Egps%E5%9D%90%E6%A0%87%E5%88%B0%E5%B7%A5%E7%A8%8B%E5%9D%90%E6%A0%87/</link>
@@ -23,20 +23,6 @@
  2.2. 地球坐标系 地球坐标系可分为大地坐标系和空间直角坐标系。在大地坐标系中描述地理位置使用的是经纬度 (B, L, H)，在空间直角坐标系中则使用 (X, Y, Z)，两套描述方式间有明确的数学关系。
 2.3. 空间坐标转换 空间坐标转换的常用方法包括七参数法，7个参数包括3个平移参数、3个旋转参数和1个尺度参数。实现空间坐标转换的步骤为：
  graph TB 椭球系统A下的BLH--空间直角坐标系A中的XYZ--七参数法转换--空间直角坐标系B中的XYZ--椭球系统B下的BLH  图2 椭球坐标系转换流程</description>
-    </item>
-    
-    <item>
-      <title>一些裂隙相关指标的含义与计算方法</title>
-      <link>https://drjasonhan.github.io/post/%E4%B8%80%E4%BA%9B%E8%A3%82%E9%9A%99%E7%9B%B8%E5%85%B3%E6%8C%87%E6%A0%87%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/</link>
-      <pubDate>Sun, 25 Oct 2020 11:46:18 +0800</pubDate>
-      
-      <guid>https://drjasonhan.github.io/post/%E4%B8%80%E4%BA%9B%E8%A3%82%E9%9A%99%E7%9B%B8%E5%85%B3%E6%8C%87%E6%A0%87%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/</guid>
-      <description>1. P32 单位体积岩体内裂隙的总面积。3代表三维 ，指岩体体积；2代表二维，指裂隙的面积。主要有以下两种计算方式：
-(1) 根据钻孔数据计算 计算公式为：
-$ P_{32}=\frac{\sum_i^n\pi\sigma^2/4/&amp;lt;\omega_i,\alpha&amp;gt;}{L\times\pi\sigma^2/4}=\sum_i^n\frac{1}{L\times&amp;lt;\omega_i,\alpha&amp;gt;} $
-(2) 根据出露面的迹线计算 2. P31 单位体积岩体内裂隙的总数。3代表三维，指岩体体积；1代表一维，指裂隙的个数。主要有以下两种计算方式：
-(1) 根据钻孔数据计算 计算公式为： $ P_{31}=\frac{n}{L\times \pi\sigma^2/4} $
-(2) 根据出露面的迹线计算 </description>
     </item>
     
   </channel>

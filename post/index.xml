@@ -6,7 +6,36 @@
     <description>Recent content in Posts on Jason Han&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 25 Oct 2020 11:46:18 +0800</lastBuildDate><atom:link href="https://drjasonhan.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 13 Nov 2020 14:46:18 +0800</lastBuildDate><atom:link href="https://drjasonhan.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo 问题汇总</title>
+      <link>https://drjasonhan.github.io/post/hugo%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/</link>
+      <pubDate>Fri, 13 Nov 2020 14:46:18 +0800</pubDate>
+      
+      <guid>https://drjasonhan.github.io/post/hugo%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/</guid>
+      <description>1. 如何在Hugo中插入Mermaid流程图 Mermaid是Markdown中最常用的绘制流程图的方式之一。不过，在某些Hugo模板中，并不能直接正常显示Mermaid流程图。解决办法如下1,2：
+ 在themes/(你的模板名称)/layouts/中增加shortcodes文件夹，并创建文件mermaid.html：  &amp;lt;script src=&amp;#34;/js/mermaid.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;div class=&amp;#34;mermaid&amp;#34;&amp;gt; {{ .Inner }} &amp;lt;/div&amp;gt; 下载 mermaid.js （与上述代码片段中的文件名对应），并添加至themes/(你的模板名称)/static/js/文件夹。 在绘制流程图时，不再```mermai开头和```结尾；而是以{{&amp;lt;mermaid&amp;gt;}}开头，以{{&amp;lt;/mermaid&amp;gt;}}结尾。 需要注意的是，在设置图类型的一行的末尾，要加上分号，如 graph TD;。不过这一点据说也因mermaid 的版本而异。  2. 如何在Hugo中插入公式 利用Hugo写的文章无法直接正常的显示数学公式，不过Hugo支持使用MathJax对数学公式进行渲染，Hugo官方提供了相应的配置方法3。不过，经过测试，这种方法很多情况下不能奏效，经多方尝试，文献 4 提供的方法是可行的，总结如下：
+ 在模板的 layouts/partials/ 路径下创建 mathjax.html 文件，内容为：  &amp;lt;script type=&amp;#34;text/javascript&amp;#34; async src=&amp;#34;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;#34;&amp;gt; MathJax.Hub.Config({ tex2jax: { inlineMath: [[&amp;#39;$&amp;#39;,&amp;#39;$&amp;#39;], [&amp;#39;\\(&amp;#39;,&amp;#39;\\)&amp;#39;]], displayMath: [[&amp;#39;$$&amp;#39;,&amp;#39;$$&amp;#39;], [&amp;#39;\[\[&amp;#39;,&amp;#39;\]\]&amp;#39;]], processEscapes: true, processEnvironments: true, skipTags: [&amp;#39;script&amp;#39;, &amp;#39;noscript&amp;#39;, &amp;#39;style&amp;#39;, &amp;#39;textarea&amp;#39;, &amp;#39;pre&amp;#39;], TeX: { equationNumbers: { autoNumber: &amp;#34;AMS&amp;#34; }, extensions: [&amp;#34;AMSmath.js&amp;#34;, &amp;#34;AMSsymbols.js&amp;#34;] } } }); MathJax.</description>
+    </item>
+    
+    <item>
+      <title>从 GPS 坐标到工程坐标</title>
+      <link>https://drjasonhan.github.io/post/%E4%BB%8Egps%E5%9D%90%E6%A0%87%E5%88%B0%E5%B7%A5%E7%A8%8B%E5%9D%90%E6%A0%87/</link>
+      <pubDate>Tue, 10 Nov 2020 11:46:18 +0800</pubDate>
+      
+      <guid>https://drjasonhan.github.io/post/%E4%BB%8Egps%E5%9D%90%E6%A0%87%E5%88%B0%E5%B7%A5%E7%A8%8B%E5%9D%90%E6%A0%87/</guid>
+      <description>测量是所有建筑施工的基础，而实现坐标信息从地理坐标系到工程坐标系的转换是整个测量工作的前提。坐标的原始信息来自 GPS，其格式为 BLH 经纬度。然而，实际工程中所使用的是 XYH 平面工程坐标系，本文的主要内容就是介绍如何实现从做原始的 GPS 坐标到工程坐标的转换。
+1. 总体流程 将原始的GPS经纬度信息转换为可用的工程坐标信息的总体流程如下：
+ flowchart TD; GPS1[&#34;1. 获取 GPS 坐标，此时为经纬度&#34;]--TranE[&#34;2. 空间坐标系转换(七参数法，可选)&#34;] TranE--Proj[&#34;3. 投影转换，得到XYH工程坐标&#34;]--Trans4P[&#34;4. 平面坐标系转换(四参数法，可选)，得到当前工程下的局部坐标&#34;] Trans4P--Second[&#34;5. 坐标的二次校核&#34;]  图1 总体流程图 上述过程的主体是步骤 1 和 3，即把空间的经纬度坐标(BLH)投影成为工程可用的平面坐标(XYH)。目前国内常用的投影方式为高斯-克吕格投影，国际中较为常用的是 UTM 投影，具体都有相关的公式，本文不再赘述。下面对其余步骤做一些说明。
+2. 基准转换 比较需要注意的是步骤 2 和 4，这两个步骤所做的都是一件事——基准转换。基准转换是指空间点在不同椭球的坐标转换，其有两种方式，分别为空间坐标转换(以七参数法为代表)和平面坐标转换方法(以四参数法为代表)。一般这两种方式不会同时采用：当工程区域较大时，倾向于直接进行空间坐标转换；当工程区域较小时，习惯上采用平面坐标转换并配合高程拟合。
+2.1. 大地基准 大地基准是建立国家大地坐标系统和推算国家大地控制网中各点大地坐标的基本依据 1。建立大地基准就是用一个椭球代表地球形体，就是建立椭球系统。
+在椭球系统中描述地理位置用的就是经纬度。我们常说：两对数值相同的经纬度在地理上可能代表的是两个完全不同的位置。其原因就在于它们所使用的椭球系统可能不同。仅在我国，所涉及的椭球系统就包括北京54、西安80和国家2000，而目前在世界上应用最为广泛的是美国的 WGS84。不同椭球系统之间的差别在于椭球的形状参数。
+ 你可能会问，地球的形状是固定的，为什么要造出来这么多种椭球坐标系呢?答案可参见 2。简而简之，一是随着测绘技术(包括数学、物理学、光学等)的发展，人们描述地球的方式慢慢进步，得出了越来越精确的椭球坐标系;二是不同的椭球坐标系的侧重点各有不同。比如，我国的北京54是1954年在苏联的协助下建立起来的，其所设定的是以他们国家为中心。后来我国的测绘技术逐渐成熟，在1980年提出了西安80,建立了以我们自己为中心的坐标系。再到后来，随着技术的进一步完善，我国建立了误差更小的国家2000坐标系。目前定位设备中大部分都采用是美国的 WGS84,而我国近年来发展起来的北斗采用的则为国家2000，不过两种椭球参数之间的差别非常微小。
+ 2.2. 地球坐标系 地球坐标系可分为大地坐标系和空间直角坐标系。在大地坐标系中描述地理位置使用的是经纬度 (B, L, H)，在空间直角坐标系中则使用 (X, Y, Z)，两套描述方式间有明确的数学关系。
+2.3. 空间坐标转换 空间坐标转换的常用方法包括七参数法，7个参数包括3个平移参数、3个旋转参数和1个尺度参数。实现空间坐标转换的步骤为：
+ graph TB 椭球系统A下的BLH--空间直角坐标系A中的XYZ--七参数法转换--空间直角坐标系B中的XYZ--椭球系统B下的BLH  图2 椭球坐标系转换流程</description>
+    </item>
+    
     <item>
       <title>一些裂隙相关指标的含义与计算方法</title>
       <link>https://drjasonhan.github.io/post/%E4%B8%80%E4%BA%9B%E8%A3%82%E9%9A%99%E7%9B%B8%E5%85%B3%E6%8C%87%E6%A0%87%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/</link>
