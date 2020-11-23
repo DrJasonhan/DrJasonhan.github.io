@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>机器学习 on Jason Han&#39;s Blog</title>
+    <link>https://drjasonhan.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
+    <description>Recent content in 机器学习 on Jason Han&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 20 Nov 2020 18:25:18 +0800</lastBuildDate><atom:link href="https://drjasonhan.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>理解 Softmax</title>
+      <link>https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3softmax/</link>
+      <pubDate>Fri, 20 Nov 2020 18:25:18 +0800</pubDate>
+      
+      <guid>https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3softmax/</guid>
+      <description>在机器学习尤其是深度学习中，Softmax 是个非常常用而且比较重要的函数，尤其在多分类的场景中使用广泛。通常，Softmax 函数被置于最后一个全连接层之后，把全连接层的输出映射为 0-1 之间的实数，并且归一化保证和为 1。
+1. Softmax 定义 $$S(a):\left[\begin{matrix} a_1	\\ a_2	\\ \cdots \\ a_N \end{matrix} \right]\rightarrow \left[\begin{matrix}S_1 \\ S_2 \\ \cdots \\ S_N \end{matrix} \right] \tag{1}$$$$S_i=\frac{e^{a_j}}{\sum_{k=1}^{N}e^{a_k}} \tag{2}$$2. 为什么要使用 Softmax Softmax 函数主要用于分类，与之对应的我们姑且称之为 Hardmax。对于一个分类结果，如 $$ [1,2,3] $$ 如果使用 Hardmax，那就意味着选出的是其中的最大值，即3；而 Softmax 则是以一定的概率选出最终的值，根据公式(1)，上面三个值得概率分别为： $$ [0.09, 0.24, 0.67] $$ 相对于 Softmax，Hardmax 在进行梯度计算时有着明显的缺陷：只有在被选中的那个变量上面才有梯度，其他都是没有的。Softmax 则不存在这一问题，具体的梯度求解公式可见下一节。
+其实，最常拿来与 Softmax 比较的不是 Hardmax，而是标准的归一化方法，即将所有输出值分别处以这些值的总和。根据这种方法，上面的结果的到的三个概率为： $$ [0.17, 0.33, 0.50] $$ 至于为什么 Softmax 更好，参考文献 1,2中各路大神讲解的较为深入。就个人理解而言，其主要原因在于平衡概率分布3以及配合交叉熵使用。</description>
+    </item>
+    
+  </channel>
+</rss>

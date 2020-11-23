@@ -3,27 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://drjasonhan.github.io/</loc>
+    <lastmod>2020-11-20T18:25:18+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://drjasonhan.github.io/post/</loc>
+    <lastmod>2020-11-20T18:25:18+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://drjasonhan.github.io/tags/</loc>
+    <lastmod>2020-11-20T18:25:18+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://drjasonhan.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2020-11-20T18:25:18+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3softmax/</loc>
+    <lastmod>2020-11-20T18:25:18+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://drjasonhan.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
+    <lastmod>2020-11-20T18:25:18+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://drjasonhan.github.io/tags/hugo/</loc>
     <lastmod>2020-11-13T14:46:18+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://drjasonhan.github.io/post/hugo%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/</loc>
-    <lastmod>2020-11-13T14:46:18+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://drjasonhan.github.io/</loc>
-    <lastmod>2020-11-13T14:46:18+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://drjasonhan.github.io/post/</loc>
-    <lastmod>2020-11-13T14:46:18+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://drjasonhan.github.io/tags/</loc>
     <lastmod>2020-11-13T14:46:18+08:00</lastmod>
   </url>
   

@@ -110,11 +110,12 @@
 <ol>
 <li>在<code>themes/(你的模板名称)/layouts/</code>中增加<code>shortcodes</code>文件夹，并创建文件<code>mermaid.html</code>：</li>
 </ol>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#8b008b;font-weight:bold">script</span> <span style="color:#658b00">src</span>=<span style="color:#cd5555">&#34;/js/mermaid.js&#34;</span>&gt;&lt;/<span style="color:#8b008b;font-weight:bold">script</span>&gt;
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#8b008b;font-weight:bold">script</span> <span style="color:#658b00">async</span> <span style="color:#658b00">src</span>=<span style="color:#cd5555">&#34;/js/mermaid.js&#34;</span>&gt;&lt;/<span style="color:#8b008b;font-weight:bold">script</span>&gt;
 &lt;<span style="color:#8b008b;font-weight:bold">div</span> <span style="color:#658b00">class</span>=<span style="color:#cd5555">&#34;mermaid&#34;</span>&gt;
 {{ .Inner }}
 &lt;/<span style="color:#8b008b;font-weight:bold">div</span>&gt;
-</code></pre></div><ol start="2">
+</code></pre></div><p><strong>此处对于mermaid.js脚本设置的async，即流程图与网页的其余部分异步执行，提高整个页面的显示效果</strong></p>
+<ol>
 <li>下载 <a href="https://unpkg.com/mermaid@8.0.0-rc.6/dist/"><code>mermaid.js</code> </a>（与上述代码片段中的文件名对应），并添加至<code>themes/(你的模板名称)/static/js/</code>文件夹。</li>
 <li>在绘制流程图时，不再<code>```mermai</code>开头和<code>```</code>结尾；而是以{{&lt;mermaid&gt;}}开头，以{{&lt;/mermaid&gt;}}结尾。</li>
 <li>需要注意的是，在设置图类型的一行的末尾，要加上分号，如 <code>graph TD;</code>。不过这一点据说也因mermaid 的版本而异。</li>
@@ -163,7 +164,33 @@ all[i].SourceElement().parentNode.className += <span style="color:#cd5555">&#39;
 <li>在模板的 <code>layouts/partials/footer.html</code> 文件最后追加一句：</li>
 </ol>
 <div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{{ partial &#34;mathjax.html&#34; . }}
-</code></pre></div><h2 id="参考">参考</h2>
+</code></pre></div><h2 id="3-在hugo中插入矩阵不能正常显示">3. 在Hugo中插入矩阵不能正常显示</h2>
+<p>虽然在 Hugo 能插入公式，但是当插入矩阵时，其显示可能出问题，如：</p>
+<p>当输入以下代码时：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">$$
+\begin{matrix}
+1 <span style="color:#a61717;background-color:#e3d2d2">&amp;</span> x <span style="color:#a61717;background-color:#e3d2d2">&amp;</span> x^2 \\
+1 <span style="color:#a61717;background-color:#e3d2d2">&amp;</span> y <span style="color:#a61717;background-color:#e3d2d2">&amp;</span> y^2 \\
+1 <span style="color:#a61717;background-color:#e3d2d2">&amp;</span> z <span style="color:#a61717;background-color:#e3d2d2">&amp;</span> z^2 \\
+\end{matrix}
+$$
+</code></pre></div><p>显示可能为：
+$$
+\left[\begin{matrix}
+1 &amp; x &amp; x^2 \<br>
+1 &amp; y &amp; y^2 \<br>
+1 &amp; z &amp; z^2 \<br>
+\end{matrix} \right]
+$$
+尝试了参考 <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> 的办法，在上述代码片段前后分别加上<code>&lt;div&gt;&lt;/div&gt;</code>可正常显示，如下：</p>
+<div>$$
+\left[\begin{matrix}
+1 & x & x^2 \\
+1 & y & y^2 \\
+1 & z & z^2 \\
+\end{matrix} \right]
+    $$</div>
+<h2 id="参考">参考</h2>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -178,6 +205,9 @@ all[i].SourceElement().parentNode.className += <span style="color:#cd5555">&#39;
 </li>
 <li id="fn:4" role="doc-endnote">
 <p><a href="https://note.qidong.name/2018/03/hugo-mathjax/">https://note.qidong.name/2018/03/hugo-mathjax/</a> <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p><a href="https://github.com/gohugoio/hugo/issues/2893">https://github.com/gohugoio/hugo/issues/2893</a> <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -201,6 +231,12 @@ all[i].SourceElement().parentNode.className += <span style="color:#cd5555">&#39;
         <h3>Latest Articles</h3>
         <div class="pure-menu pure-menu-open">
             <ul class="pure-menu-list">
+                
+                <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3softmax/" class="pure-menu-link">理解 Softmax<br>
+                        <small></small>
+                    </a>
+                </li>
                 
                 <li class="pure-menu-item">
                     <a href="https://drjasonhan.github.io/post/hugo%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="pure-menu-link">Hugo 问题汇总<br>
@@ -235,6 +271,10 @@ all[i].SourceElement().parentNode.className += <span style="color:#cd5555">&#39;
             
             <a href="/tags/%e5%b7%a5%e7%a8%8b%e5%9c%b0%e8%b4%a8" class="pure-button"> 工程地质
                 <small>(2)</small></a>
+            
+            
+            
+            
             
             
             
