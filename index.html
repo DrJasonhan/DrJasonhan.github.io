@@ -383,136 +383,6 @@ $$
 </div>
 
 <article>
-    <h1><a href="https://drjasonhan.github.io/post/hugo%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB-%E5%89%AF%E6%9C%AC/">Hugo 问题汇总</a></h1>
-    <div class="tags">
-        
-        
-        <a href="/tags/hugo" class="pure-button">Hugo</a>
-        
-        
-        <a href="/tags/%E7%BC%96%E7%A8%8B" class="pure-button">编程</a>
-        
-    </div>
-    <h2 id="1-如何在hugo中插入mermaid流程图">1. 如何在Hugo中插入Mermaid流程图</h2>
-<p>Mermaid是Markdown中最常用的绘制流程图的方式之一。不过，在某些Hugo模板中，并不能直接正常显示Mermaid流程图。解决办法如下<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><sup>,</sup><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>：</p>
-<ol>
-<li>在<code>themes/(你的模板名称)/layouts/</code>中增加<code>shortcodes</code>文件夹，并创建文件<code>mermaid.html</code>：</li>
-</ol>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#8b008b;font-weight:bold">script</span> <span style="color:#658b00">async</span> <span style="color:#658b00">src</span>=<span style="color:#cd5555">&#34;/js/mermaid.js&#34;</span>&gt;&lt;/<span style="color:#8b008b;font-weight:bold">script</span>&gt;
-&lt;<span style="color:#8b008b;font-weight:bold">div</span> <span style="color:#658b00">class</span>=<span style="color:#cd5555">&#34;mermaid&#34;</span>&gt;
-{{ .Inner }}
-&lt;/<span style="color:#8b008b;font-weight:bold">div</span>&gt;
-</code></pre></div><p><strong>此处对于mermaid.js脚本设置的async，即流程图与网页的其余部分异步执行，提高整个页面的显示效果</strong></p>
-<ol>
-<li>下载 <a href="https://unpkg.com/mermaid@8.0.0-rc.6/dist/"><code>mermaid.js</code> </a>（与上述代码片段中的文件名对应），并添加至<code>themes/(你的模板名称)/static/js/</code>文件夹。</li>
-<li>在绘制流程图时，不再<code>```mermai</code>开头和<code>```</code>结尾；而是以{{&lt;mermaid&gt;}}开头，以{{&lt;/mermaid&gt;}}结尾。</li>
-<li>需要注意的是，在设置图类型的一行的末尾，要加上分号，如 <code>graph TD;</code>。不过这一点据说也因mermaid 的版本而异。</li>
-</ol>
-<h2 id="2-如何在hugo中插入公式">2. 如何在Hugo中插入公式</h2>
-<p>利用Hugo写的文章无法直接正常的显示数学公式，不过Hugo支持使用MathJax对数学公式进行渲染，Hugo官方提供了相应的<a href="https://www.gohugo.org/doc/tutorials/mathjax/">配置方法</a><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>。不过，经过测试，这种方法很多情况下不能奏效，经多方尝试，文献 <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> 提供的方法是可行的，总结如下：</p>
-<ol>
-<li>在模板的 <code>layouts/partials/</code> 路径下创建 <code>mathjax.html</code> 文件，内容为：</li>
-</ol>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#8b008b;font-weight:bold">script</span> <span style="color:#658b00">type</span>=<span style="color:#cd5555">&#34;text/javascript&#34;</span>
-<span style="color:#658b00">async</span>
-<span style="color:#658b00">src</span>=<span style="color:#cd5555">&#34;https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;</span>&gt;
-MathJax.Hub.Config({
-tex2jax: {
-inlineMath: [[<span style="color:#cd5555">&#39;$&#39;</span>,<span style="color:#cd5555">&#39;$&#39;</span>], [<span style="color:#cd5555">&#39;\\(&#39;</span>,<span style="color:#cd5555">&#39;\\)&#39;</span>]],
-displayMath: [[<span style="color:#cd5555">&#39;$$&#39;</span>,<span style="color:#cd5555">&#39;$$&#39;</span>], [<span style="color:#cd5555">&#39;\[\[&#39;</span>,<span style="color:#cd5555">&#39;\]\]&#39;</span>]],
-processEscapes: <span style="color:#8b008b;font-weight:bold">true</span>,
-processEnvironments: <span style="color:#8b008b;font-weight:bold">true</span>,
-skipTags: [<span style="color:#cd5555">&#39;script&#39;</span>, <span style="color:#cd5555">&#39;noscript&#39;</span>, <span style="color:#cd5555">&#39;style&#39;</span>, <span style="color:#cd5555">&#39;textarea&#39;</span>, <span style="color:#cd5555">&#39;pre&#39;</span>],
-TeX: { equationNumbers: { autoNumber: <span style="color:#cd5555">&#34;AMS&#34;</span> },
-extensions: [<span style="color:#cd5555">&#34;AMSmath.js&#34;</span>, <span style="color:#cd5555">&#34;AMSsymbols.js&#34;</span>] }
-}
-});
-
-MathJax.Hub.Queue(<span style="color:#8b008b;font-weight:bold">function</span>() {
-<span style="color:#228b22">// Fix &lt;code&gt; tags after MathJax finishes running. This is a
-</span><span style="color:#228b22">// hack to overcome a shortcoming of Markdown. Discussion at
-</span><span style="color:#228b22">// https://github.com/mojombo/jekyll/issues/199
-</span><span style="color:#228b22"></span><span style="color:#8b008b;font-weight:bold">var</span> all = MathJax.Hub.getAllJax(), i;
-<span style="color:#8b008b;font-weight:bold">for</span>(i = <span style="color:#b452cd">0</span>; i &lt; all.length; i += <span style="color:#b452cd">1</span>) {
-all[i].SourceElement().parentNode.className += <span style="color:#cd5555">&#39; has-jax&#39;</span>;
-}
-});
-&lt;/<span style="color:#8b008b;font-weight:bold">script</span>&gt;
-
-&lt;<span style="color:#8b008b;font-weight:bold">style</span>&gt;
-<span style="color:#8b008b;font-weight:bold">code</span>.<span style="color:#008b45;font-weight:bold">has-jax</span> {
-<span style="color:#8b008b;font-weight:bold">font</span>: <span style="color:#8b008b;font-weight:bold">inherit</span>;
-<span style="color:#8b008b;font-weight:bold">font-size</span>: <span style="color:#b452cd">100</span><span style="color:#00688b;font-weight:bold">%</span>;
-<span style="color:#8b008b;font-weight:bold">background</span>: <span style="color:#8b008b;font-weight:bold">inherit</span>;
-<span style="color:#8b008b;font-weight:bold">border</span>: <span style="color:#8b008b;font-weight:bold">inherit</span>;
-<span style="color:#8b008b;font-weight:bold">color</span>: <span style="color:#b452cd">#515151</span>;
-}
-&lt;/<span style="color:#8b008b;font-weight:bold">style</span>&gt;
-</code></pre></div><ol start="2">
-<li>在模板的 <code>layouts/partials/footer.html</code> 文件最后追加一句：</li>
-</ol>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{{ partial &#34;mathjax.html&#34; . }}
-</code></pre></div><h2 id="3-在hugo中插入矩阵不能正常显示">3. 在Hugo中插入矩阵不能正常显示</h2>
-<p>虽然在 Hugo 能插入公式，但是当插入矩阵时，其显示可能出问题，如：</p>
-<p>当输入以下代码时：</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">$$
-\begin{matrix}
-1 <span style="color:#a61717;background-color:#e3d2d2">&amp;</span> x <span style="color:#a61717;background-color:#e3d2d2">&amp;</span> x^2 \\
-1 <span style="color:#a61717;background-color:#e3d2d2">&amp;</span> y <span style="color:#a61717;background-color:#e3d2d2">&amp;</span> y^2 \\
-1 <span style="color:#a61717;background-color:#e3d2d2">&amp;</span> z <span style="color:#a61717;background-color:#e3d2d2">&amp;</span> z^2 \\
-\end{matrix}
-$$
-</code></pre></div><p>显示可能为：
-$$
-\left[\begin{matrix}
-1 &amp; x &amp; x^2 \<br>
-1 &amp; y &amp; y^2 \<br>
-1 &amp; z &amp; z^2 \<br>
-\end{matrix} \right]
-$$
-尝试了参考 <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> 的办法，在上述代码片段前后分别加上<code>&lt;div&gt;&lt;/div&gt;</code>可正常显示，如下：</p>
-<div>$$
-\left[\begin{matrix}
-1 & x & x^2 \\
-1 & y & y^2 \\
-1 & z & z^2 \\
-\end{matrix} \right]
-    $$</div>
-<h2 id="参考">参考</h2>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p><a href="https://osgav.run/lab/hugo-mermaid-diagrams.html">https://osgav.run/lab/hugo-mermaid-diagrams.html</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p><a href="https://www.hairizuan.com/rendering-diagrams-in-hugo/">https://www.hairizuan.com/rendering-diagrams-in-hugo/</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3" role="doc-endnote">
-<p><a href="https://www.gohugo.org/doc/tutorials/mathjax/">https://www.gohugo.org/doc/tutorials/mathjax/</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4" role="doc-endnote">
-<p><a href="https://note.qidong.name/2018/03/hugo-mathjax/">https://note.qidong.name/2018/03/hugo-mathjax/</a> <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:5" role="doc-endnote">
-<p><a href="https://github.com/gohugoio/hugo/issues/2893">https://github.com/gohugoio/hugo/issues/2893</a> <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-
-</article>
-</div>
-    <div class="pad"></div>
-
-    
-
-    <div class="pad">
-<div class="date">
-    <time pubdate="2020-11-13">November 13, 2020</time>
-    <span class="author">by Jason Han</span>
-</div>
-
-<article>
     <h1><a href="https://drjasonhan.github.io/post/hugo%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">Hugo 问题汇总</a></h1>
     <div class="tags">
         
@@ -608,7 +478,7 @@ $$
 1 & z & z^2 \\
 \end{matrix} \right]
     $$</div>
-## 4. 点击标题连接后显示未找到页面 
+<h2 id="4-点击标题连接后显示未找到页面">4. 点击标题连接后显示未找到页面</h2>
 <p>可能是因为文件命名时是存在特殊符号，如“#”，在写C#相关的文章是，需要注意可以把文件名称中的#替换成“Sharp”。</p>
 <h2 id="参考">参考</h2>
 <section class="footnotes" role="doc-endnotes">
@@ -879,12 +749,6 @@ $$</p>
                 </li>
                 
                 <li class="pure-menu-item">
-                    <a href="https://drjasonhan.github.io/post/hugo%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB-%E5%89%AF%E6%9C%AC/" class="pure-menu-link">Hugo 问题汇总<br>
-                        <small></small>
-                    </a>
-                </li>
-                
-                <li class="pure-menu-item">
                     <a href="https://drjasonhan.github.io/post/hugo%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="pure-menu-link">Hugo 问题汇总<br>
                         <small></small>
                     </a>
@@ -916,16 +780,11 @@ $$</p>
             
             
             <a href="/tags/%e7%bc%96%e7%a8%8b" class="pure-button"> 编程
-                <small>(4)</small></a>
+                <small>(3)</small></a>
             
             
             
             <a href="/tags/c#" class="pure-button"> c#
-                <small>(2)</small></a>
-            
-            
-            
-            <a href="/tags/hugo" class="pure-button"> hugo
                 <small>(2)</small></a>
             
             
@@ -937,6 +796,8 @@ $$</p>
             
             <a href="/tags/%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0" class="pure-button"> 机器学习
                 <small>(2)</small></a>
+            
+            
             
             
             
