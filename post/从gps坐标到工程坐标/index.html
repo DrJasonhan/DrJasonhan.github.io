@@ -147,7 +147,7 @@ graph TB
 <h3 id="24-平面坐标转换">2.4. 平面坐标转换</h3>
 <p>平面坐标转换最常用的方法为<strong>四参数法</strong>，4个参数包括2个平移参数、1个旋转参数和1个尺度因子。需要注意的是，平面坐标转换的过程并不涉及高程，仅仅是对投影后的(X, Y)坐标进行变换。因此，通常要配合高程拟合，如固定差拟合、一次线性拟合和二次线性拟合。</p>
 <h2 id="3-坐标的二次校核">3. 坐标的二次校核</h2>
-<p>在完成基准转换之后，为进一步提高精度，需要在利用一个额外的控制点进行坐标的二次校核：将一个额外控制点的工程坐标 (X, Y, H) 与定位设备采集到的该点的坐标(X', Y', H')相减，得到二次校核的参数 ($\Delta$X, $\Delta$Y, $\Delta$Z)。</p>
+<p>在完成基准转换之后，为进一步提高精度，需要再利用一个额外的控制点进行坐标的二次校核：将一个额外控制点的工程坐标 (X, Y, H) 与定位设备采集到的该点的坐标(X', Y', H')相减，得到二次校核的参数 ($\Delta$X, $\Delta$Y, $\Delta$Z)。</p>
 <p>另外需要注意一点，对于同一工程，二次校核的参数也是有可能不同的。因为，出于各种原因，整个差分网络有可能需要重启，重启后的差分网络将形成新的虚拟参考站。在这种情况下，新的测量值与之前的测量值会有一定的误差，需要重新进行二次校核。</p>
 <h2 id="4-总结">4. 总结</h2>
 <p>本文主要的主要目的是梳理将定位设备中采集到的 GPS 经纬度信息转化为工程平面坐标的整个流程。其中每个步骤均涉及一系列公式和方法，不过这些并非本文的重点，读者可通过关键词自行搜索。</p>
@@ -185,7 +185,25 @@ graph TB
             <ul class="pure-menu-list">
                 
                 <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8c#%E8%B0%83%E7%94%A8microsoft-appstore%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="pure-menu-link">如何使用C#调用Microsoft App Store 中下载的应用<br>
+                        <small></small>
+                    </a>
+                </li>
+                
+                <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8c#%E8%B0%83%E7%94%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0pb%E6%A8%A1%E5%9E%8B/" class="pure-menu-link">如何使用C#调用已训练好的 pb 模型<br>
+                        <small></small>
+                    </a>
+                </li>
+                
+                <li class="pure-menu-item">
                     <a href="https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3softmax/" class="pure-menu-link">理解 Softmax<br>
+                        <small></small>
+                    </a>
+                </li>
+                
+                <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/hugo%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB-%E5%89%AF%E6%9C%AC/" class="pure-menu-link">Hugo 问题汇总<br>
                         <small></small>
                     </a>
                 </li>
@@ -221,10 +239,28 @@ graph TB
         <div style="text-align:center" class="tags">
             
             
+            <a href="/tags/%e7%bc%96%e7%a8%8b" class="pure-button"> 编程
+                <small>(4)</small></a>
+            
+            
+            
+            <a href="/tags/c#" class="pure-button"> c#
+                <small>(2)</small></a>
+            
+            
+            
+            <a href="/tags/hugo" class="pure-button"> hugo
+                <small>(2)</small></a>
+            
+            
+            
             <a href="/tags/%e5%b7%a5%e7%a8%8b%e5%9c%b0%e8%b4%a8" class="pure-button"> 工程地质
                 <small>(2)</small></a>
             
             
+            
+            <a href="/tags/%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0" class="pure-button"> 机器学习
+                <small>(2)</small></a>
             
             
             
@@ -246,7 +282,7 @@ graph TB
                 
             </div><div class="pure-g">
 	<footer class="pure-u-1 pure-u-md-1 pure-u-sm-1">
-		<p>This page and its contents are copyright &copy; 2020,
+		<p>This page and its contents are copyright &copy; 2021,
 			<a href="">Jason Han</a>.</p>
 		
 	</footer>

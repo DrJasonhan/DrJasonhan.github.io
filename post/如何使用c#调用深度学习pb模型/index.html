@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#000" />
+    <title>
+        
+            如何使用C#调用已训练好的 pb 模型 &middot; Jason Han&#39;s Blog Jason Han&#39;s Blog
+        
+    </title>
+
+    
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+        integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    
+    
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/atom.xml" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="">
+    
+    
+    <meta name="description" content="Move on">
+    
+
+    
+    <meta name="keywords" content="深度学习,Tensorflow,编程&#34;,C#">
+    
+    <meta name="author" content="Jason Han"></head>
+<body>
+        <div class="container"><div id="navbar" class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-scrollable">
+    <a href="/" class="pure-menu-heading">
+         
+            Jason Han&#39;s Blog 
+         
+    </a>
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+            <a href="/post" class="pure-menu-link">
+                <i class="fa fa-archive"></i>
+                Articles
+            </a>
+        </li>
+        <li class="pure-menu-item">
+            <a href="/tags" class="pure-menu-link">
+                <i class="fas fa-comments"></i>
+                Categories
+            </a>
+        </li>
+        <li class="pure-menu-item">
+            <a href="/about" class="pure-menu-link">
+                <i class="fas fa-smile"></i>
+                About
+            </a>
+        </li>
+    </ul>
+    <ul class="pure-menu-list pull-right">
+        
+        <li class="pure-menu-item">
+            <a href="https://github.com/DrJasonhan" title="Github" class="pure-menu-link">
+                <i class="fab fa-github"></i>
+                <span class="hide">Github</span>
+            </a>
+        </li>
+        
+        
+        
+        
+        
+        <li class="pure-menu-item">
+            <a href="/post/index.xml" title="Atom Feed" class="pure-menu-link">
+                <i class="fas fa-rss-square"></i>
+                <span class="hide">RSS Feed</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="pure-u-1">
+    <div class="pad">
+    </div>
+</div>
+<div class="pure-g">
+
+
+<div id="content" class="pure-u-1 pure-u-md-3-4 pure-u-sm-1">
+    <div class="pad">
+<div class="date">
+    <time pubdate="2020-12-17">December 17, 2020</time>
+    <span class="author">by Jason Han</span>
+</div>
+
+<article>
+    <h1><a href="https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8c#%E8%B0%83%E7%94%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0pb%E6%A8%A1%E5%9E%8B/">如何使用C#调用已训练好的 pb 模型</a></h1>
+    <div class="tags">
+        
+        
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0" class="pure-button">深度学习</a>
+        
+        
+        <a href="/tags/tensorflow" class="pure-button">Tensorflow</a>
+        
+        
+        <a href="/tags/%E7%BC%96%E7%A8%8B" class="pure-button">编程&#34;</a>
+        
+        
+        <a href="/tags/c" class="pure-button">C#</a>
+        
+    </div>
+    <p>在深度学习领域，Python占据着举足轻重的位置，然而，由于其脚本编程的特点，在业界并没有较大的优势。相比之下，C++、Java、C#等编程语言则能更好的满足业界的各种需求。本人长期从事 C# 开发，本文的内容是探讨如何在C#编程中调用已训练好的 .pb 深度学习模型。</p>
+<p>目前已存在多种 .Net 平台下的深度学习框架，如 Tensorflow.Net、SciSharp、TensorflowSharp等。本文以 TensorflowSharp 为例进行讲解。</p>
+<h2 id="1-安装-tensorflowsharp">1. 安装 TensorflowSharp</h2>
+<p>可直接在 Nuget 中搜索 TensorflowSharp，选择相应版本下载。下载时注意不同版本对应不同的 .Net Framework。</p>
+<h2 id="2-具体代码">2. 具体代码</h2>
+<p>调用模型并预测图片的代码为：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">TFGraph graph = <span style="color:#8b008b;font-weight:bold">new</span> TFGraph();
+<span style="color:#228b22">//重点是下面的这句，把训练好的pb文件给读出来字节，然后导入
+</span><span style="color:#228b22"></span><span style="color:#00688b;font-weight:bold">string</span> modelPath = Directory.GetCurrentDirectory() + <span style="color:#cd5555">&#34;\\model.pb&#34;</span>;
+<span style="color:#00688b;font-weight:bold">byte</span>[] model = File.ReadAllBytes(modelPath);
+graph.Import(model);
+
+<span style="color:#00688b;font-weight:bold">var</span> tensor = ImageUtil.CreateTensorFromImageFile(picturePath);
+
+<span style="color:#8b008b;font-weight:bold">using</span> (<span style="color:#00688b;font-weight:bold">var</span> sess = <span style="color:#8b008b;font-weight:bold">new</span> TFSession(graph))
+{
+    <span style="color:#228b22">// 计算类别概率
+</span><span style="color:#228b22"></span>    <span style="color:#00688b;font-weight:bold">var</span> runner = sess.GetRunner();
+    runner.AddInput(graph[<span style="color:#cd5555">&#34;Mul&#34;</span>][<span style="color:#b452cd">0</span>], tensor);
+    <span style="color:#00688b;font-weight:bold">var</span> r = runner.Run(graph.Softmax(graph[<span style="color:#cd5555">&#34;final_result&#34;</span>][<span style="color:#b452cd">0</span>]));
+    <span style="color:#00688b;font-weight:bold">var</span> v = (<span style="color:#00688b;font-weight:bold">float</span>[,])r.GetValue();
+}
+</code></pre></div><p>其中，ImageUtil 代码如下：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8b008b;font-weight:bold">public</span> <span style="color:#8b008b;font-weight:bold">static</span> <span style="color:#8b008b;font-weight:bold">class</span> <span style="color:#008b45;font-weight:bold">ImageUtil</span>
+{
+    <span style="color:#8b008b;font-weight:bold">public</span> <span style="color:#8b008b;font-weight:bold">static</span> TFTensor CreateTensorFromImageFile(<span style="color:#00688b;font-weight:bold">byte</span>[] contents, TFDataType destinationDataType = TFDataType.Float)
+    {
+        <span style="color:#00688b;font-weight:bold">var</span> tensor = TFTensor.CreateString(contents);
+
+        TFOutput input, output;
+
+        <span style="color:#228b22">// Construct a graph to normalize the image
+</span><span style="color:#228b22"></span>        <span style="color:#8b008b;font-weight:bold">using</span> (<span style="color:#00688b;font-weight:bold">var</span> graph = ConstructGraphToNormalizeImage(<span style="color:#8b008b;font-weight:bold">out</span> input, <span style="color:#8b008b;font-weight:bold">out</span> output, destinationDataType))
+        {
+            <span style="color:#228b22">// Execute that graph to normalize this one image
+</span><span style="color:#228b22"></span>            <span style="color:#8b008b;font-weight:bold">using</span> (<span style="color:#00688b;font-weight:bold">var</span> session = <span style="color:#8b008b;font-weight:bold">new</span> TFSession(graph))
+            {
+                <span style="color:#00688b;font-weight:bold">var</span> normalized = session.Run(
+                inputs: <span style="color:#8b008b;font-weight:bold">new</span>[] { input },
+                inputValues: <span style="color:#8b008b;font-weight:bold">new</span>[] { tensor },
+                outputs: <span style="color:#8b008b;font-weight:bold">new</span>[] { output });
+
+                <span style="color:#8b008b;font-weight:bold">return</span> normalized[<span style="color:#b452cd">0</span>];
+            }
+        }
+    }
+    <span style="color:#228b22">// Convert the image in filename to a Tensor suitable as input to the Inception model.
+</span><span style="color:#228b22"></span>    <span style="color:#8b008b;font-weight:bold">public</span> <span style="color:#8b008b;font-weight:bold">static</span> TFTensor CreateTensorFromImageFile(<span style="color:#00688b;font-weight:bold">string</span> file, TFDataType destinationDataType = TFDataType.Float)
+    {
+        <span style="color:#228b22">//Thread.Sleep(500);
+</span><span style="color:#228b22"></span>        <span style="color:#00688b;font-weight:bold">var</span> contents = File.ReadAllBytes(file);
+
+        <span style="color:#228b22">// DecodeJpeg uses a scalar String-valued tensor as input.
+</span><span style="color:#228b22"></span>        <span style="color:#00688b;font-weight:bold">var</span> tensor = TFTensor.CreateString(contents);
+
+        TFOutput input, output;
+
+        <span style="color:#228b22">// Construct a graph to normalize the image
+</span><span style="color:#228b22"></span>        <span style="color:#8b008b;font-weight:bold">using</span> (<span style="color:#00688b;font-weight:bold">var</span> g = ConstructGraphToNormalizeImage(<span style="color:#8b008b;font-weight:bold">out</span> input, <span style="color:#8b008b;font-weight:bold">out</span> output, destinationDataType))
+        {
+            <span style="color:#228b22">// Execute that graph to normalize this one image
+</span><span style="color:#228b22"></span>            <span style="color:#8b008b;font-weight:bold">using</span> (<span style="color:#00688b;font-weight:bold">var</span> sess = <span style="color:#8b008b;font-weight:bold">new</span> TFSession(g))
+            {
+            <span style="color:#00688b;font-weight:bold">var</span> normalized = sess.Run(
+            inputs: <span style="color:#8b008b;font-weight:bold">new</span>[] { input },
+            inputValues: <span style="color:#8b008b;font-weight:bold">new</span>[] { tensor },
+            outputs: <span style="color:#8b008b;font-weight:bold">new</span>[] { output });
+
+            <span style="color:#8b008b;font-weight:bold">return</span> normalized[<span style="color:#b452cd">0</span>];
+            }
+        }
+    }
+    <span style="color:#8b008b;font-weight:bold">private</span> <span style="color:#8b008b;font-weight:bold">static</span> TFGraph ConstructGraphToNormalizeImage(<span style="color:#8b008b;font-weight:bold">out</span> TFOutput input, <span style="color:#8b008b;font-weight:bold">out</span> TFOutput output, TFDataType destinationDataType = TFDataType.Float)
+    {
+        <span style="color:#228b22">// 以下四个参数，根据模型的输入层确定
+</span><span style="color:#228b22"></span>        <span style="color:#8b008b;font-weight:bold">const</span> <span style="color:#00688b;font-weight:bold">int</span> W = <span style="color:#b452cd">299</span>; 
+        <span style="color:#8b008b;font-weight:bold">const</span> <span style="color:#00688b;font-weight:bold">int</span> H = <span style="color:#b452cd">299</span>; 
+        <span style="color:#8b008b;font-weight:bold">const</span> <span style="color:#00688b;font-weight:bold">float</span> Mean = <span style="color:#b452cd">128</span>;
+        <span style="color:#8b008b;font-weight:bold">const</span> <span style="color:#00688b;font-weight:bold">float</span> Scale = <span style="color:#b452cd">128</span>;
+
+        <span style="color:#00688b;font-weight:bold">var</span> graph = <span style="color:#8b008b;font-weight:bold">new</span> TFGraph();
+        input = graph.Placeholder(TFDataType.String);
+
+        output = graph.Cast(
+        graph.Div(x: graph.Sub(x: graph.ResizeBilinear(images: graph.ExpandDims(input: graph.Cast(graph.DecodeJpeg(contents: input, channels: <span style="color:#b452cd">3</span>), DstT: TFDataType.Float),
+        dim: graph.Const(<span style="color:#b452cd">0</span>, <span style="color:#cd5555">&#34;make_batch&#34;</span>)),
+        size: graph.Const(<span style="color:#8b008b;font-weight:bold">new</span> <span style="color:#00688b;font-weight:bold">int</span>[] { W, H }, <span style="color:#cd5555">&#34;INPUT_SIZE&#34;</span>)),
+        y: graph.Const(Mean, <span style="color:#cd5555">&#34;IMAGE_MEAN&#34;</span>)),
+        y: graph.Const(Scale, <span style="color:#cd5555">&#34;IMAGE_STD&#34;</span>)), destinationDataType);
+
+        <span style="color:#8b008b;font-weight:bold">return</span> graph;
+    }
+
+}
+</code></pre></div><h2 id="3-注意事项">3. 注意事项</h2>
+<ol>
+<li>
+<p>graph.Import()函数有可能报错，如果是 netstandard相关的错误，可通过将项目的 .Net Framework升至更新版解决。</p>
+</li>
+<li>
+<p>对于该行代码：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">runner.AddInput(graph[<span style="color:#cd5555">&#34;Mul&#34;</span>][<span style="color:#b452cd">0</span>], tensor);
+<span style="color:#00688b;font-weight:bold">var</span> r = runner.Run(graph.Softmax(graph[<span style="color:#cd5555">&#34;final_result&#34;</span>][<span style="color:#b452cd">0</span>]));
+</code></pre></div><p>其中的 Mul 和 final_result 是模型的输入层和输出层的 layername，因此因模型而异。对于所使用的模型，可通过：</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">List&lt;TFOperation&gt; op_list = <span style="color:#8b008b;font-weight:bold">new</span> List&lt;TFOperation&gt;(graph.GetEnumerator());
+</code></pre></div><p>获取所有层的名称。</p>
+</li>
+<li>
+<p>在调试过程中，</p>
+</li>
+<li>
+<p>垃圾回收机制导致的报错&rsquo;CallbackOnCollectedDelegate' ，升级到1.3以后就没有了</p>
+</li>
+</ol>
+<h2 id="参考">参考</h2>
+
+</article>
+
+    </div>
+</div>
+
+
+                
+<div id="sidebar" class="pure-u-1 pure-u-md-1-4 pure-u-sm-1">
+    <div class="pad">
+        <a name="about"></a>
+        <h3>About Me</h3>
+        <div style="text-align: center;">
+            <img src="/img/author.png" alt="Jason Han" class="pure-img" />
+            <p><em>Jason Han (Han Shuai)</em></p>
+        </div>
+
+        <h3>Latest Articles</h3>
+        <div class="pure-menu pure-menu-open">
+            <ul class="pure-menu-list">
+                
+                <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8c#%E8%B0%83%E7%94%A8microsoft-appstore%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="pure-menu-link">如何使用C#调用Microsoft App Store 中下载的应用<br>
+                        <small></small>
+                    </a>
+                </li>
+                
+                <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8c#%E8%B0%83%E7%94%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0pb%E6%A8%A1%E5%9E%8B/" class="pure-menu-link">如何使用C#调用已训练好的 pb 模型<br>
+                        <small></small>
+                    </a>
+                </li>
+                
+                <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3softmax/" class="pure-menu-link">理解 Softmax<br>
+                        <small></small>
+                    </a>
+                </li>
+                
+                <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/hugo%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB-%E5%89%AF%E6%9C%AC/" class="pure-menu-link">Hugo 问题汇总<br>
+                        <small></small>
+                    </a>
+                </li>
+                
+                <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/hugo%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="pure-menu-link">Hugo 问题汇总<br>
+                        <small></small>
+                    </a>
+                </li>
+                
+                <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/%E4%BB%8Egps%E5%9D%90%E6%A0%87%E5%88%B0%E5%B7%A5%E7%A8%8B%E5%9D%90%E6%A0%87/" class="pure-menu-link">从 GPS 坐标到工程坐标<br>
+                        <small></small>
+                    </a>
+                </li>
+                
+                <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/%E4%B8%80%E4%BA%9B%E8%A3%82%E9%9A%99%E7%9B%B8%E5%85%B3%E6%8C%87%E6%A0%87%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/" class="pure-menu-link">一些裂隙相关指标的含义与计算方法<br>
+                        <small></small>
+                    </a>
+                </li>
+                
+                <li class="pure-menu-item">
+                    <a href="https://drjasonhan.github.io/post/%E7%90%86%E8%A7%A3mlemap%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1/" class="pure-menu-link">重新理解MLE，MAP和贝叶斯估计<br>
+                        <small></small>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+
+        <h3>Categories</h3>
+        <div style="text-align:center" class="tags">
+            
+            
+            <a href="/tags/%e7%bc%96%e7%a8%8b" class="pure-button"> 编程
+                <small>(4)</small></a>
+            
+            
+            
+            <a href="/tags/c#" class="pure-button"> c#
+                <small>(2)</small></a>
+            
+            
+            
+            <a href="/tags/hugo" class="pure-button"> hugo
+                <small>(2)</small></a>
+            
+            
+            
+            <a href="/tags/%e5%b7%a5%e7%a8%8b%e5%9c%b0%e8%b4%a8" class="pure-button"> 工程地质
+                <small>(2)</small></a>
+            
+            
+            
+            <a href="/tags/%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0" class="pure-button"> 机器学习
+                <small>(2)</small></a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </div>
+    </div> 
+</div> 
+
+                
+            </div><div class="pure-g">
+	<footer class="pure-u-1 pure-u-md-1 pure-u-sm-1">
+		<p>This page and its contents are copyright &copy; 2021,
+			<a href="">Jason Han</a>.</p>
+		
+	</footer>
+
+	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+		integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+		crossorigin="anonymous"></script>
+	
+	
+
+</div>
+
+<script type="text/javascript"
+async
+src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+tex2jax: {
+inlineMath: [['$','$'], ['\\(','\\)']],
+displayMath: [['$$','$$'], ['\[\[','\]\]']],
+processEscapes: true,
+processEnvironments: true,
+skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+TeX: { equationNumbers: { autoNumber: "AMS" },
+ extensions: ["AMSmath.js", "AMSsymbols.js"] }
+}
+});
+
+MathJax.Hub.Queue(function() {
+
+
+
+var all = MathJax.Hub.getAllJax(), i;
+for(i = 0; i < all.length; i += 1) {
+all[i].SourceElement().parentNode.className += ' has-jax';
+}
+});
+</script>
+
+<style>
+code.has-jax {
+font: inherit;
+font-size: 100%;
+background: inherit;
+border: inherit;
+color: #515151;
+}
+</style></div></body>
+</html>
