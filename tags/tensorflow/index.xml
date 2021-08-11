@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 17 Dec 2020 19:40:02 +0800</lastBuildDate><atom:link href="https://drjasonhan.github.io/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何使用C#调用已训练好的 pb 模型</title>
-      <link>https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8c#%E8%B0%83%E7%94%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0pb%E6%A8%A1%E5%9E%8B/</link>
+      <link>https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8csharp%E8%B0%83%E7%94%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0pb%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Thu, 17 Dec 2020 19:40:02 +0800</pubDate>
       
-      <guid>https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8c#%E8%B0%83%E7%94%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0pb%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8csharp%E8%B0%83%E7%94%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0pb%E6%A8%A1%E5%9E%8B/</guid>
       <description>在深度学习领域，Python占据着举足轻重的位置，然而，由于其脚本编程的特点，在业界并没有较大的优势。相比之下，C++、Java、C#等编程语言则能更好的满足业界的各种需求。本人长期从事 C# 开发，本文的内容是探讨如何在C#编程中调用已训练好的 .pb 深度学习模型。
 目前已存在多种 .Net 平台下的深度学习框架，如 Tensorflow.Net、SciSharp、TensorflowSharp等。本文以 TensorflowSharp 为例进行讲解。
 1. 安装 TensorflowSharp 可直接在 Nuget 中搜索 TensorflowSharp，选择相应版本下载。下载时注意不同版本对应不同的 .Net Framework。

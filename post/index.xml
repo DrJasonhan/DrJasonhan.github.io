@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 30 Dec 2020 14:44:20 +0800</lastBuildDate><atom:link href="https://drjasonhan.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何使用C#调用Microsoft App Store 中下载的应用</title>
-      <link>https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8c#%E8%B0%83%E7%94%A8microsoft-appstore%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</link>
+      <link>https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8csharp%E8%B0%83%E7%94%A8microsoft-appstore%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</link>
       <pubDate>Wed, 30 Dec 2020 14:44:20 +0800</pubDate>
       
-      <guid>https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8c#%E8%B0%83%E7%94%A8microsoft-appstore%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
+      <guid>https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8csharp%E8%B0%83%E7%94%A8microsoft-appstore%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
       <description>Win10之后，许多之前常用的应用，包括录音机、照相机等，都被归为了 Microsoft App Store 所管理的范畴，无法直接通过诸如 Process.Start(&amp;ldquo;video.exe&amp;rdquo;)、Process.Start(&amp;ldquo;camera.exe&amp;rdquo;)等命令调用。目前较为可行的方法是，通过调用 cmd，再将自动填入命令，最终实现 App 的调用。示例代码如下：
 Process p = new Process(); //设置要启动的应用程序 p.StartInfo.FileName = &amp;#34;cmd.exe&amp;#34;; //是否使用操作系统shell启动 p.StartInfo.UseShellExecute = false; // 接受来自调用程序的输入信息 p.StartInfo.RedirectStandardInput = true; //输出信息 p.StartInfo.RedirectStandardOutput = true; // 输出错误 p.StartInfo.RedirectStandardError = true; //不显示程序窗口 p.StartInfo.CreateNoWindow = true; //启动程序 p.Start(); // shell 后面的link可能因app的版本而异 p.StandardInput.WriteLine(@&amp;#34;explorer.exe shell:AppsFolder\2568CaiJunhong.CompassOne_nnrr2ryxcqq94!App&amp;#34;); p.Close(); 该示例调用的是“指北针”，其所对应的链接2568CaiJunhong.CompassOne_nnrr2ryxcqq94!App可通过如下方式获取1：
   先打开 cmd，输入explorer.exe shell:AppsFolder\，此时打开了应用文件夹，如图所示：
@@ -24,10 +24,10 @@ Process p = new Process(); //设置要启动的应用程序 p.StartInfo.FileName
     
     <item>
       <title>如何使用C#调用已训练好的 pb 模型</title>
-      <link>https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8c#%E8%B0%83%E7%94%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0pb%E6%A8%A1%E5%9E%8B/</link>
+      <link>https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8csharp%E8%B0%83%E7%94%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0pb%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Thu, 17 Dec 2020 19:40:02 +0800</pubDate>
       
-      <guid>https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8c#%E8%B0%83%E7%94%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0pb%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>https://drjasonhan.github.io/post/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8csharp%E8%B0%83%E7%94%A8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0pb%E6%A8%A1%E5%9E%8B/</guid>
       <description>在深度学习领域，Python占据着举足轻重的位置，然而，由于其脚本编程的特点，在业界并没有较大的优势。相比之下，C++、Java、C#等编程语言则能更好的满足业界的各种需求。本人长期从事 C# 开发，本文的内容是探讨如何在C#编程中调用已训练好的 .pb 深度学习模型。
 目前已存在多种 .Net 平台下的深度学习框架，如 Tensorflow.Net、SciSharp、TensorflowSharp等。本文以 TensorflowSharp 为例进行讲解。
 1. 安装 TensorflowSharp 可直接在 Nuget 中搜索 TensorflowSharp，选择相应版本下载。下载时注意不同版本对应不同的 .Net Framework。
